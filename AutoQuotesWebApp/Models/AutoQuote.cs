@@ -33,5 +33,7 @@ namespace AutoQuotesWebApp.Models
         public decimal SubtotalAfterCoverageTypeCalc { get; set; }
         public decimal MonthlyQuoteRate { get; set; }
         public string YearlyQuoteRate { get; set; }
+    
+        public virtual Insuree Insuree { get; set; }
     }
 }

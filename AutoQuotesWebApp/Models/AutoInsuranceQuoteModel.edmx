@@ -137,10 +137,6 @@
             <End Role="Insuree" EntitySet="Insurees" />
             <End Role="AutoQuote" EntitySet="AutoQuotes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Insurees_Insurees" Association="AutoInsuranceQuotesModel.FK_Insurees_Insurees">
-            <End Role="Insuree" EntitySet="Insurees" />
-            <End Role="Insuree1" EntitySet="Insurees" />
-          </AssociationSet>
           <AssociationSet Name="FK_Insurees_AutoQuotes" Association="AutoInsuranceQuotesModel.FK_Insurees_AutoQuotes">
             <End Role="AutoQuote" EntitySet="AutoQuotes" />
             <End Role="Insuree" EntitySet="Insurees" />
@@ -154,18 +150,6 @@
               <PropertyRef Name="InsureeId" />
             </Principal>
             <Dependent Role="AutoQuote">
-              <PropertyRef Name="InsureeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Insurees_Insurees">
-          <End Type="AutoInsuranceQuotesModel.Insuree" Role="Insuree" Multiplicity="1" />
-          <End Type="AutoInsuranceQuotesModel.Insuree" Role="Insuree1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Insuree">
-              <PropertyRef Name="InsureeId" />
-            </Principal>
-            <Dependent Role="Insuree1">
               <PropertyRef Name="InsureeId" />
             </Dependent>
           </ReferentialConstraint>
