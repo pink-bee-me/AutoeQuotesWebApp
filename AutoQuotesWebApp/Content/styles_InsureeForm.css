@@ -1,0 +1,134 @@
+﻿    /******** Insuree/Create  ***********/
+    /*!!!!!!! CityStreetsCellPhone: ENTER INSUREE FORM !!!!!!!*/
+    /******* A.K.A Create Form With Button Get Quote / Button Back to Lis******/
+    /* InsureeControlle / Create.cshtml */
+    body {
+        position:relative;
+        top:-10vh;
+        left:0vw;
+        margin:0,0,0,0;
+        padding: 0;
+        width: 100vh;
+        height: 100vw;
+        background-color:black;
+    }
+
+    #BackgroundImage{
+        position:relative;
+        top:3vh;
+        left:3vw;
+        width:100vw;
+        height:100vh;
+        background-image:url("Images/YellowLinesBlacktop.jpg");
+        background-size:cover;
+    }
+    #ColorOverlay {
+        position:relative;
+        top:5vh;
+        left:0vw;
+        background-color:rgba(128, 128, 128, 0.45);
+    }
+
+    #TextContainer {
+        position:relative;
+        top: 3vh;
+        left: 5vw;
+        width:95vw;
+        height:95vh;
+        color:white;
+     
+    }
+    #EnterInfo {
+        margin-bottom:2px;
+    }
+
+#HiddenInsureeIdField {
+    width: 0vw;
+    height: 0vh;
+}
+
+#HiddenAutoQuoteIdField {
+    width:0vw;
+    height:0vh;
+}
+
+    .insureeDataField {
+      
+        font-size:1.2S5em;
+    }
+
+
+    .form-group {
+        width:50vw;
+        height:7vh;
+        margin: 5px 5px,0px,5px;
+        padding:5px;
+        font-size:1.25em;
+        font-family:"Nunito Sans", sans-serif;
+        font-weight:600;
+    }
+
+
+    #FormSubmitButton {
+        position:relative;
+        bottom:75vh;
+        right:-55vw;
+        width:30vw;
+
+    }
+
+    #CreateButton {
+        width:15vw;
+        height:5vh;
+        color:white;
+        background-color:orchid;
+        font-size:1.25em;
+    }
+
+    #FormConnectionLinks {
+        position:relative;
+        bottom:50vh;
+        right:-55vw;
+        width:30vw;
+
+    }
+
+
+
+#InsureeCreatePageBodyContainer {
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    font-family: "Josefin Sans", sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+#InsureeCreateBackground img {
+    position: relative;
+    top: 0;
+    left: 0vw;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+
+#Color_Overlay {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    background-size: cover;
+    background: rgba(255,255,255,.35);
+    width: 100vw;
+    height: 150vh;
+}
+
+.jumbotron {
+    position: relative;
+    bottom: 100vh;
+    right: 3vw;
+    background: none;
+    font-size: 1.5em;
+    color: white;
+}

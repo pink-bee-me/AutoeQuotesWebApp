@@ -1,7 +1,60 @@
-﻿@{
-    ViewBag.Title = "About";
+﻿
+@{
+  Layout = null;
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="~/Content/styles_HomeAboutPage.css" />
+</head>
+<body id="HomeAboutPageBodyContainer">
+  <div id="ColorOverlay">
+    <div id="ImageTextOverlay">
+      <div class="jumbotron">
+
+        <h1 id="BetterDeal" style="font-size:4em;">Can you get a better deal on your auto insurance?</h1>
+
+        <h3 id="Yes">The answer is... YES, Absolutely!!!</h3>
+        <br/><br/> 
+        <h2 id="RightPlace">Welcome to...</h2>
+        <h1 id="CompanyName">The Auto Insurance Connection</h1>
+        <h2 id="RightPlace2">you've definitely come to the right place!</h2><br /><br />
+          <br />
+          <div id="MainContent">
+          
+
+            <div id="SalesPitch">
+              <h3>Our Mission:</h3>
+              <p>
+                To Deliver Exceptional Coverage and Provide Outstanding Service at The Best Price Ever!!!
+                <h3>The Process:</h3>
+              <p>
+                Here &#64 <strong>The Auto Insurance Connection</strong>, each and every policy is precisely crafted<br />
+                and highly customized using our patented formula which evaluates your specific <br />
+                insurance needs based on these <strong>
+                  Three Key Factors:<br />
+                  Lifestyle, Personal Finance/Budget, and Coverage Requirements.
+                </strong>
+              </p>
+              <h3>The Result:</h3>
+              <p>A top-notch Auto Inurance Solution that is custom-made and tailor-fit just for you!</p>
+            </div>
+          </div>
+          <h2 id="Life">Life is like the ultimate "Road Trip", where each person chooses their own path...<br />The personal experience is therefore unique and so are the insurance needs of each traveler!!!<br />So let's sit back, take a minute, and then do yourself a favor...</h2><br />
+          <h3 id="Join"> Join US! and Let The Good Times Roll...</h3>
+          <div id="FreeQuoteButton">
+            @Html.ActionLink("Get Your Free Quote Today!", "NewInsureeFormData", "Insuree", new { @class = "font-size:1.5em; color:white;" })
+     </div>
+        </div>
+      </div>
+      </div>
+
+</body>
+</html>
+
+

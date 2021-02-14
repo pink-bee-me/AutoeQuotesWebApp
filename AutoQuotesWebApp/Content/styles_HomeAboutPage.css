@@ -1,0 +1,191 @@
+﻿
+/*!!!!!!! Home ABOUT Page Styles !!!!!!!*/
+/******* "CAN YOU GET A BETTER DEAL ON YOUR AUTO INSURANCE ? "  ******/
+/*Home/Index styles*/
+
+
+html {
+    clear:unset;
+    width:100vw;
+    height:100vh;
+}
+
+body {
+    position:relative;
+    top:0vh;
+    left:0vw;
+    width:100vw;
+    height:100vh;
+    margin:0;
+}
+
+#HomeAboutPageBodyContainer {
+    position: relative;
+    top: 0vh;
+    left: 0vw;
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-image:url("Images/SeasideDrive.jpg");
+    background-size: cover;
+}
+
+#ColorOverlay {
+    position: relative;
+    top: -6vh;
+    left:-1vw;
+    background-color: rgba(128,128,128,0.75);
+    width: 100vw;
+    height: 100vh;
+}
+
+.jumbotron {
+    position: relative;
+    top:5vh;
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 0vh;
+    padding-left: 7vw;
+    padding-bottom: 5vh;
+    font-family:"Josefin Sans", sans-serif;
+}
+
+    .jumbotron h3 {
+        position: relative;
+        top: -11vh;
+        left: 0vw;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-top: 0;
+        margin-bottom: 0px;
+        font-size:1.5em;
+        font-style:italic;
+    }
+
+    .jumbotron p {
+        position: relative;
+        top: -3vh;
+        left: 10vw;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        font-weight:300;
+    }
+
+    #MainContent {
+      position:relative;
+      top:0vh;
+      left:5vw;
+    }
+
+#CompanyName {
+    position:relative;
+    top:0;
+    left: 10vw;
+    font-weight: bold;
+    font-size: 2.75em;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+#Yes {
+    position: relative;
+    top: 0vh;
+    left: 5vw;
+    margin-top:0vh;
+    font-size: 2em;
+    font-weight:600;
+}
+
+#RightPlace {
+    position: relative;
+    top: 0vh;
+    left: 5vw;
+    font-size: 2em;
+    font-family:"Josefin Sans", sans-serif;
+    font-weight:200;
+}
+
+#RightPlace2 {
+position:relative;
+top:0;
+left:10vw;
+margin-top:0;
+font-family:"Josefin Sans",sans-serif;
+font-weight:400;
+font-size:1.75em;
+
+}
+
+#AboutUs {
+    position: relative;
+    top: -5vh;
+    left: 0vw;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+#Probably h2 {
+    position: relative;
+    top: 22vh;
+    left: 10vw;
+    font-size: 2.5em;
+    font-style: italic;
+    font-weight: 300;
+}
+
+#SalesPitch {
+    position:relative;
+    top:7vh;
+    left:10vw;
+}
+
+#SalesPitch p{
+    position:relative;
+    top:-14vh;
+    font-size: 1.75em;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-style:italic;
+    display: inline-block;
+    line-height:1.20em
+}
+
+#SalesPitch span {
+    position: relative;
+    top: -5vh;
+    left: 5vw;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#Join {
+    position: relative;
+    top: -7vh;
+    left: 0vw;
+    font-size: 2.5em;
+    font-style:italic;
+}
+
+
+#Life {
+    position: relative;
+    top: -7vh;
+    left: 5vw;
+    font-size: 1.75em;
+    font-weight: 400;
+}
+
+     #FreeQuoteButton a {
+    position: relative;
+    top: -10.5vh;
+    left: 45vw;
+    background-color: orchid;
+    color: white;
+    font-size: 2.5em;
+    padding: 10px;
+    text-align: center;
+    box-shadow: rgba(0,0,0,.04)10px;
+}

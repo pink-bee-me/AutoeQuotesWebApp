@@ -1,31 +1,34 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+  Layout = null;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Index</title>
+  <link rel="stylesheet" href="~/Content/styles_HomeIndexLandingPage.css" type="text/css">
+</head>
+<body>
+  <div id="LandingPageHomeIndex">
+    @*<img src="~/Content/Images/LandingPageCut.png" aspect-ratio="auto" alt="Middle Of Road Picture" />*@
+    <div id="ColorOverlay">
+        <div id="TextOverlay">
+          <h1 id="AreYou">Are you paying too much for auto insurance?</h1>
+
+          <h5 id="Sadly">Sadly,... the answer is probably "YES".</h5>
+
+          <p id="Favor">Let's just take a moment and think about that ...shall we???<br/>
+            Now do yourself a favor ...</p>
+          <p id="HowMuch"><span> Stop Throwing Your $$$$$ Away!!!</span></p>
+
+          <div id="FreeQuoteButton">
+            @Html.ActionLink("Get Your FREE QUOTE Right Here!", "NewInsureeFormData", "Insuree");
+          </div>
+      </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+</body>
+</html>
