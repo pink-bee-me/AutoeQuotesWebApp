@@ -1,0 +1,37 @@
+﻿@model AutoQuotesWebApp.Models.Insuree
+
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Success</title>
+  <link rel="stylesheet" href="~/Content/styles_PostYesSuccess.css" />
+</head>
+<body>
+  <div>
+    <h2>Submission Successful :</h2><br /><br />
+
+    <ul>
+      New Insuree:
+      @{
+          var insureeInfoData = ViewBag.InsureeInfo;
+          var messageViewBag = ViewBag.Message;
+      }
+      <li>Insuree Id: @insureeInfoData.InsureeId</li>
+      <li>First Name: @insureeInfoData.FirstName </li>
+      <li>Last Name: @insureeInfoData.LastName</li>
+      <li>Email Address: @insureeInfoData.EmailAddress</li>
+    </ul>
+    <p>@messageViewBag</p>
+    <div id="CreateAutoQuote">
+      @Html.ActionLink("Calculate Quote", "Index", "AutoQuotes", null, new { @class = "btn btn-success", insureeInfoData
+   .InsureeId })
+    </div>
+  </div>
+</body>
+</html>

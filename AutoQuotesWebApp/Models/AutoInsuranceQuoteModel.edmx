@@ -27,7 +27,7 @@
           <Property Name="CoverageTypeRate" Type="money" Nullable="false" />
           <Property Name="SubtotalAfterCoverageTypeCalc" Type="money" Nullable="false" />
           <Property Name="MonthlyQuoteRate" Type="money" Nullable="false" />
-          <Property Name="YearlyQuoteRate" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="YearlyQuoteRate" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="Insurees">
           <Key>
@@ -108,7 +108,7 @@
           <Property Name="CoverageTypeRate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="SubtotalAfterCoverageTypeCalc" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="MonthlyQuoteRate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="YearlyQuoteRate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="YearlyQuoteRate" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="Insuree" Relationship="AutoInsuranceQuotesModel.FK_AutoQuotes_Insurees1" FromRole="AutoQuote" ToRole="Insuree" />
         </EntityType>
         <EntityType Name="Insuree">

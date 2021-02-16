@@ -189,7 +189,7 @@
     <Content Include="Content\styles_HomeAboutPage.css" />
     <Content Include="Content\styles_HomeIndexLandingPage.css" />
     <Content Include="Content\styles_InsureeForm.css" />
-    <Content Include="Content\styles_PostNoSuccess.css" />
+    <Content Include="Content\styles_PostYesSuccess.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -393,8 +393,8 @@
     <Content Include="Views\AutoQuotes\Details.cshtml" />
     <Content Include="Views\AutoQuotes\Edit.cshtml" />
     <Content Include="Views\AutoQuotes\Index.cshtml" />
-    <Content Include="Views\Insurees\NewInsureeFormData.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Insurees\PostYesSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -408,6 +408,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="App_Data\AutoInsuranceQuotes\AutoInsuranceQuotes.sqlproj">
+      <Project>{5d02ed1b-efc7-4006-b568-51d414c48688}</Project>
+      <Name>AutoInsuranceQuotes</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

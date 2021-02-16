@@ -54,7 +54,7 @@
 
     .insureeDataField {
       
-        font-size:1.2S5em;
+        font-size:1.25em;
     }
 
 
@@ -74,12 +74,14 @@
         bottom:75vh;
         right:-55vw;
         width:30vw;
+        font-size:1.25em;
 
     }
 
     #CreateButton {
         width:15vw;
         height:5vh;
+        margin-top:2vh;
         color:white;
         background-color:orchid;
         font-size:1.25em;
@@ -90,7 +92,12 @@
         bottom:50vh;
         right:-55vw;
         width:30vw;
+        color:white;
+        font-size:1.5em;
+    }
 
+    a {
+        color:coral;
     }
 
 
