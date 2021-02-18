@@ -18,6 +18,9 @@
     <table class="table">
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.AutoId)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
@@ -30,37 +33,25 @@
                 @Html.DisplayNameFor(model => model.DateOfBirth)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AutoYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AutoMake)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AutoModel)
+                @Html.DisplayNameFor(model => model.DUI)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SpeedingTickets)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DUI)
+                @Html.DisplayNameFor(model => model.Insurees1.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CoverageType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AutoQuoteId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MonthlyQuoteRate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YearlyQuoteRate)
+                @Html.DisplayNameFor(model => model.Insuree1.FirstName)
             </th>
             <th></th>
         </tr>
     
     @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -74,31 +65,16 @@
                 @Html.DisplayFor(modelItem => item.DateOfBirth)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AutoYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AutoMake)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AutoModel)
+                @Html.DisplayFor(modelItem => item.DUI)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SpeedingTickets)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DUI)
+                @Html.DisplayFor(modelItem => item.Insurees1.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CoverageType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AutoQuoteId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MonthlyQuoteRate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearlyQuoteRate)
+                @Html.DisplayFor(modelItem => item.Insuree1.FirstName)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.InsureeId }) |

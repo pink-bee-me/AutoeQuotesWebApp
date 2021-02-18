@@ -17,6 +17,14 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
+                @Html.DisplayNameFor(model => model.AutoId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AutoId)
+            </dd>
+    
+            <dt>
                 @Html.DisplayNameFor(model => model.FirstName)
             </dt>
     
@@ -49,27 +57,11 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.AutoYear)
+                @Html.DisplayNameFor(model => model.DUI)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.AutoYear)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.AutoMake)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.AutoMake)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.AutoModel)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.AutoModel)
+                @Html.DisplayFor(model => model.DUI)
             </dd>
     
             <dt>
@@ -81,43 +73,19 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.DUI)
+                @Html.DisplayNameFor(model => model.Insurees1.FirstName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.DUI)
+                @Html.DisplayFor(model => model.Insurees1.FirstName)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.CoverageType)
+                @Html.DisplayNameFor(model => model.Insuree1.FirstName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.CoverageType)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.AutoQuoteId)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.AutoQuoteId)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.MonthlyQuoteRate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.MonthlyQuoteRate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.YearlyQuoteRate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.YearlyQuoteRate)
+                @Html.DisplayFor(model => model.Insuree1.FirstName)
             </dd>
     
         </dl>

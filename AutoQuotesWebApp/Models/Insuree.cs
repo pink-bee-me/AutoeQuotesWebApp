@@ -9,32 +9,31 @@
 
 namespace AutoQuotesWebApp.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class Insuree
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Insuree()
         {
-            this.AutoQuotes = new HashSet<AutoQuote>();
+            this.Autos = new HashSet<Auto>();
+            this.Quotes = new HashSet<Quote>();
         }
-    
+
         public int InsureeId { get; set; }
+        public Auto AutoId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public System.DateTime DateOfBirth { get; set; }
-        public int AutoYear { get; set; }
-        public string AutoMake { get; set; }
-        public string AutoModel { get; set; }
-        public int SpeedingTickets { get; set; }
         public bool DUI { get; set; }
-        public bool CoverageType { get; set; }
-        public int AutoQuoteId { get; set; }
-    
+        public int SpeedingTickets { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AutoQuote> AutoQuotes { get; set; }
-        public virtual AutoQuote AutoQuote { get; set; }
+        public virtual ICollection<Auto> Autos { get; set; }
+        public virtual Insuree Insurees1 { get; set; }
+        public virtual Insuree Insuree1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Quote> Quotes { get; set; }
     }
 }
