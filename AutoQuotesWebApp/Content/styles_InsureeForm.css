@@ -42,12 +42,17 @@
         margin-bottom:2px;
     }
 
-#HiddenInsureeIdField {
+#IdHiddenField {
     width: 0vw;
     height: 0vh;
 }
 
-#HiddenAutoQuoteIdField {
+#MonthlyRateHiddenField {
+    width:0vw;
+    height:0;
+}
+
+#YearlyRateHiddenField {
     width:0vw;
     height:0vh;
 }
@@ -72,16 +77,17 @@
     #FormSubmitButton {
         position:relative;
         bottom:75vh;
-        right:-55vw;
+        right:-40vw;
         width:30vw;
         font-size:1.25em;
 
     }
 
     #CreateButton {
-        width:15vw;
+        width:13vw;
         height:5vh;
         margin-top:2vh;
+        text-align:center;
         color:white;
         background-color:orchid;
         font-size:1.25em;
@@ -89,8 +95,8 @@
 
     #FormConnectionLinks {
         position:relative;
-        bottom:50vh;
-        right:-55vw;
+        bottom:60vh;
+        right:-40vw;
         width:30vw;
         color:white;
         font-size:1.5em;

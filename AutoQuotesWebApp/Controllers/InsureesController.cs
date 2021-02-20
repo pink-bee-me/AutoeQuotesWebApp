@@ -8,7 +8,7 @@ namespace AutoQuotesWebApp.Controllers
 {
     public class InsureesController : Controller
     {
-        AutoQuotesDBEntities autoQuotesDB = new AutoQuotesDBEntities();
+        AutoQuotesDBEntities1 autoQuotesDB = new AutoQuotesDBEntities1();
 
         // GET: Insurees
         public ActionResult Index()
@@ -35,9 +35,8 @@ namespace AutoQuotesWebApp.Controllers
         // GET: Insurees/Create
         public ActionResult Create()
         {
-            ViewBag.InsureeId = new SelectList(autoQuotesDB.Insurees, "InsureeId", "FirstName", "LastName", "EmailAddress", "DateOfBirth");
-
-            return View();
+            var model = new Insuree();
+            return View(model);
         }
 
         // POST: Insurees/Create
@@ -54,7 +53,7 @@ namespace AutoQuotesWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.InsureeId = new SelectList(autoQuotesDB.Insurees, "InsureeId", "FirstName", insuree.InsureeId);
+            ViewBag.InsureeIdInfo = new SelectList(autoQuotesDB.Insurees, "InsureeId", "FirstName", insuree.InsureeId);
 
             return View(insuree);
         }
