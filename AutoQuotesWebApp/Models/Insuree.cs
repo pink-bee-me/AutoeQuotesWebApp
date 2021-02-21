@@ -10,14 +10,19 @@
 namespace AutoQuotesWebApp.Models
 {
     using System;
-    using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Insuree
     {
+
+
+
         public int InsureeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [Required(ErrorMessage = "Required Field. Enter Email Address.")]
         public string EmailAddress { get; set; }
+        [DataType(DataType.Date)]
         public System.DateTime DateOfBirth { get; set; }
         public int AutoYear { get; set; }
         public string AutoMake { get; set; }
@@ -27,5 +32,34 @@ namespace AutoQuotesWebApp.Models
         public bool CoverageType { get; set; }
         public Nullable<decimal> MonthlyRate { get; set; }
         public Nullable<decimal> YearlyRate { get; set; }
+
+        public Insuree()
+        { }
+
+        public Insuree(InsureeVM insureeVm)
+        {
+            InsureeId = insureeVm.VmInsureeId;
+            FirstName = insureeVm.VmFirstName;
+            LastName = insureeVm.VmLastName;
+            EmailAddress = insureeVm.VmEmailAddress;
+            DateOfBirth = insureeVm.VmDateOfBirth;
+            AutoYear = insureeVm.VmAutoYear;
+            AutoMake = insureeVm.VmAutoMake;
+            AutoModel = insureeVm.VmAutoModel;
+            SpeedingTickets = insureeVm.VmSpeedingTickets;
+            DUI = insureeVm.VmDUI;
+            CoverageType = insureeVm.VmCoverageType;
+            MonthlyRate = insureeVm.VmMonthlyRate;
+            YearlyRate = insureeVm.VmYearlyRate;
+        }
+
+        public Insuree(int insureeId, string firstName, string lastName, string emailAddress,
+                       DateTime dateOfBirth, int autoYear, string autoMake, string autoModel, int speedingTickets, bool dui, bool coverageType,
+                       decimal monthlyRate, decimal yearlyRate)
+        {
+
+        }
+
+
     }
 }

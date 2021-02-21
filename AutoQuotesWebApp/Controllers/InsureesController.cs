@@ -8,13 +8,12 @@ namespace AutoQuotesWebApp.Controllers
 {
     public class InsureesController : Controller
     {
-        AutoQuotesDBEntities1 autoQuotesDB = new AutoQuotesDBEntities1();
+        private AutoQuotesDBEntities1 db = new AutoQuotesDBEntities1();
 
         // GET: Insurees
         public ActionResult Index()
         {
-            var insurees = autoQuotesDB.Insurees.ToList();
-            return View(insurees);
+            return View(db.Insurees.ToList());
         }
 
         // GET: Insurees/Details/5
@@ -24,7 +23,7 @@ namespace AutoQuotesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Insuree insuree = autoQuotesDB.Insurees.Find(id);
+            Insuree insuree = db.Insurees.Find(id);
             if (insuree == null)
             {
                 return HttpNotFound();
@@ -35,7 +34,9 @@ namespace AutoQuotesWebApp.Controllers
         // GET: Insurees/Create
         public ActionResult Create()
         {
-            var model = new Insuree();
+            InsureeVM insureeVm = new InsureeVM();
+            var model = insureeVm;
+            var insuree = new Insuree(insureeVm);
             return View(model);
         }
 
@@ -44,16 +45,16 @@ namespace AutoQuotesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InsureeId,AutoId,FirstName,LastName,EmailAddress,DateOfBirth,DUI,SpeedingTickets")] Insuree insuree)
+        public ActionResult Create([Bind(Include = "InsureeId,FirstName,LastName,EmailAddress,DateOfBirth,AutoYear,AutoMake,AutoModel,SpeedingTickets,DUI,CoverageType,MonthlyRate,YearlyRate")] Insuree insuree)
         {
+
             if (ModelState.IsValid)
             {
-                autoQuotesDB.Insurees.Add(insuree);
-                autoQuotesDB.SaveChanges();
+
+                db.Insurees.Add(insuree);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.InsureeIdInfo = new SelectList(autoQuotesDB.Insurees, "InsureeId", "FirstName", insuree.InsureeId);
 
             return View(insuree);
         }
@@ -65,13 +66,11 @@ namespace AutoQuotesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Insuree insuree = autoQuotesDB.Insurees.Find(id);
+            Insuree insuree = db.Insurees.Find(id);
             if (insuree == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.InsureeId = new SelectList(autoQuotesDB.Insurees, "InsureeId", "FirstName", insuree.InsureeId);
-            ViewBag.InsureeId = new SelectList(autoQuotesDB.Insurees, "InsureeId", "FirstName", insuree.InsureeId);
             return View(insuree);
         }
 
@@ -80,16 +79,14 @@ namespace AutoQuotesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InsureeId,AutoId,FirstName,LastName,EmailAddress,DateOfBirth,DUI,SpeedingTickets")] Insuree insuree)
+        public ActionResult Edit([Bind(Include = "InsureeId,FirstName,LastName,EmailAddress,DateOfBirth,AutoYear,AutoMake,AutoModel,SpeedingTickets,DUI,CoverageType,MonthlyRate,YearlyRate")] Insuree insuree)
         {
             if (ModelState.IsValid)
             {
-                autoQuotesDB.Entry(insuree).State = EntityState.Modified;
-                autoQuotesDB.SaveChanges();
+                db.Entry(insuree).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.InsureeId = new SelectList(autoQuotesDB.Insurees, "InsureeId", "FirstName", insuree.InsureeId);
-            ViewBag.InsureeId = new SelectList(autoQuotesDB.Insurees, "InsureeId", "FirstName", insuree.InsureeId);
             return View(insuree);
         }
 
@@ -100,7 +97,7 @@ namespace AutoQuotesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Insuree insuree = autoQuotesDB.Insurees.Find(id);
+            Insuree insuree = db.Insurees.Find(id);
             if (insuree == null)
             {
                 return HttpNotFound();
@@ -113,9 +110,9 @@ namespace AutoQuotesWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Insuree insuree = autoQuotesDB.Insurees.Find(id);
-            autoQuotesDB.Insurees.Remove(insuree);
-            autoQuotesDB.SaveChanges();
+            Insuree insuree = db.Insurees.Find(id);
+            db.Insurees.Remove(insuree);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -123,7 +120,7 @@ namespace AutoQuotesWebApp.Controllers
         {
             if (disposing)
             {
-                autoQuotesDB.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }
