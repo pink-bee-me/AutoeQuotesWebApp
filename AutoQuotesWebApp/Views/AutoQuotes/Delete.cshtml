@@ -1,0 +1,176 @@
+﻿@model AutoQuotesWebApp.Models.AutoQuote
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>AutoQuote</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.QuoteGenerationDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.QuoteGenerationDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.InsureeId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.InsureeId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseRate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BaseRate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AgeUnder18Rate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AgeUnder18Rate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AgeBtwn19and25Rate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AgeBtwn19and25Rate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AgeOver25Rate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AgeOver25Rate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AutoYearBefore2000Rate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AutoYearBefore2000Rate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AutoYearAfter2015Rate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AutoYearAfter2015Rate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IsPorscheRate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IsPorscheRate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IsCarreraRate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IsCarreraRate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SpeedingTicketsRate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SpeedingTicketsRate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SubtotalBeforeDuiCalc)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SubtotalBeforeDuiCalc)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DuiRateUp25Percent)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DuiRateUp25Percent)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SubtotalAfterDuiCalc)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SubtotalAfterDuiCalc)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CoverageTypeRateUp50Percent)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CoverageTypeRateUp50Percent)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SubtotalAfterCoverageCalc)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SubtotalAfterCoverageCalc)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MonthlyQuoteRate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MonthlyQuoteRate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.YearlyQuoteRate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.YearlyQuoteRate)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

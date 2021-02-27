@@ -16,6 +16,7 @@ body {
     background: no-repeat;
     background-image: url("Images/FrontPage.jpg");
     background-size: cover;
+    font-family:"Josefin Sans", sans-serif;
 }
 
 
@@ -61,8 +62,8 @@ body {
     text-align:center;
     padding-top: 1.5rem;
     font-family: "Josefin Sans", sans-serif;
-    font-weight: 200;
-    font-size: 5em;
+    font-size: 4.5em;
+    font-weight:400;
     font-style: italic;
     color: white;
     padding-bottom: 0px;
@@ -72,9 +73,8 @@ body {
 #Sadly {
     position: relative;
     color: white;
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 600;
-    font-size: 2.5em;
+    font-weight: 400;
+    font-size: 3em;
     /*     font-style: italic;*/
     position: relative;
     top: 10vh;
@@ -86,24 +86,24 @@ body {
 
 #Favor {
     position: relative;
-    top: 25vh;
+    top: 10vh;
     margin-top: 10px;
     padding-top: 10px;
-    font-size: 1.75em;
+    font-size: 2.5em;
     font-family: "Nunito Sans", sans-serif;
-    font-weight: 600;
+    font-weight: 400;
     color: white;
     text-align: center;
 }
 
 #HowMuch {
     position: relative;
-    top: 25vh;
+    top: 7vh;
     left: 0vw;
     margin-bottom: 0;
     font-family: "Nunito Sans",sans-serif;
-    font-size: 1.5em;
-    font-weight: 600;
+    font-size: 2em;
+    font-weight:500;
     color: white;
     text-align: center;
 }
@@ -111,7 +111,7 @@ body {
 
 #FreeQuoteButton a {
     position: relative;
-    top: 30vh;
+    top: 10vh;
     left: 40vw;
     font-family: "Nunito Sans", sans-serif;
     font-size: 1.5em;

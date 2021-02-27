@@ -17,6 +17,7 @@ body {
     width:100vw;
     height:100vh;
     margin:0;
+    font-family:"Josefin Sans",sans-serif;
 }
 
 #HomeAboutPageBodyContainer {
@@ -74,42 +75,75 @@ body {
 
     #MainContent {
       position:relative;
-      top:0vh;
-      left:5vw;
+      top:-10vh;
+      left:0vw;
+    }
+
+    #Question {
+        position:relative;
+        top:7vh;
+        left:3vw;
+        font-size:2em;
+        font-weight:400;
+
+
+
+    }
+
+ 
+
+    #BetterDeal {
+        position:relative;
+        top:-3vh;
+        left:15vw;
+        font-size:5em;
+        font-family: "Josefin Sans", sans-serif;
+        font-weight:200;
+
+
     }
 
 #CompanyName {
     position:relative;
-    top:0;
-    left: 10vw;
-    font-weight: bold;
+    top:-17vh;
+    left: 15vw;
+    font-weight: 600;
     font-size: 2.75em;
     padding-bottom: 15px;
     margin-bottom: 10px;
 }
-
-#Yes {
+#Solution {
     position: relative;
-    top: 0vh;
-    left: 5vw;
+    top: -10vh;
+    left: 3vw;
     margin-top:0vh;
     font-size: 2em;
-    font-weight:600;
+    font-weight:400;
+    font-style:italic;
+
 }
 
-#RightPlace {
+#Answer {
     position: relative;
-    top: 0vh;
-    left: 5vw;
+    top: -3vh;
+    left: 3vw;
     font-size: 2em;
     font-family:"Josefin Sans", sans-serif;
-    font-weight:200;
+    font-weight:400;
 }
 
-#RightPlace2 {
+#Yes {
+    position:relative;
+    top:-9vh;
+    left:15vw;
+    font-size:2em;
+    font-weight:400;
+    font-style:italic;
+}
+#RightPlace {
 position:relative;
-top:0;
-left:10vw;
+top:-10vh;
+left:15vw;
 margin-top:0;
 font-family:"Josefin Sans",sans-serif;
 font-weight:400;
@@ -136,8 +170,8 @@ font-size:1.75em;
 
 #SalesPitch {
     position:relative;
-    top:7vh;
-    left:10vw;
+    top:5vh;
+    left:5vw;
 }
 
 #SalesPitch p{
@@ -163,25 +197,33 @@ font-size:1.75em;
 
 #Join {
     position: relative;
-    top: -7vh;
-    left: 0vw;
+    top: -25vh;
+    left: 3vw;
     font-size: 2.5em;
     font-style:italic;
 }
 
+#Conclusion {
+    position:relative;
+    top:-17vh;
+    left:3vw;
+    font-size:2em;
+    font-weight:500;
+}
 
 #Life {
     position: relative;
-    top: -7vh;
-    left: 5vw;
-    font-size: 1.75em;
-    font-weight: 400;
+    top: -24vh;
+    left: 15vw;
+    font-size: 2.25em;
+    font-weight: 300;
+    font-style:italic;
 }
 
      #FreeQuoteButton a {
     position: relative;
-    top: -10.5vh;
-    left: 45vw;
+    top: -30vh;
+    left: 40vw;
     background-color: orchid;
     color: white;
     font-size: 2.5em;

@@ -10,56 +10,62 @@
 namespace AutoQuotesWebApp.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Insuree
     {
-
-
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Insuree()
+        {
+            this.AutoQuotes = new HashSet<AutoQuote>();
+        }
+        [Display(Name = "Insuree Id")]
         public int InsureeId { get; set; }
+
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "Required Field: Please enter First Name.")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "Required Field: Please enter your Last Name.")]
         public string LastName { get; set; }
-        [Required(ErrorMessage = "Required Field. Enter Email Address.")]
+
+        [Display(Name = "Email Address")]
+        [Required(ErrorMessage = "Required Field: Please enter your Email Address.")]
         public string EmailAddress { get; set; }
+
+        [Display(Name = "Date Of Birth")]
+        [Required(ErrorMessage = "Required Field: Please enter your Date Of Birth.")]
         [DataType(DataType.Date)]
         public System.DateTime DateOfBirth { get; set; }
+
+        [Display(Name = "Auto Year (example: 2006)")]
+        [Required(ErrorMessage = "Required Field: Please enter the year of your vehicle model.")]
         public int AutoYear { get; set; }
+
+        [Display(Name = "Auto Make (example: Ford)")]
+        [Required(ErrorMessage = "Required Field: Please enter the manufacturer of your vehicle.")]
         public string AutoMake { get; set; }
+
+        [Display(Name = "Auto Model (example: F-150)")]
+        [Required(ErrorMessage = "Required Field: Please enter the model of your vehicle.")]
         public string AutoModel { get; set; }
+
+        [Display(Name = "Speeding Tickets (enter a number)")]
+        [Required(ErrorMessage = "Required Field: If there are no speeding tickets on your driving record enter [0].")]
         public int SpeedingTickets { get; set; }
+
+        [Display(Name = "DUI on Driving Record")]
         public bool DUI { get; set; }
+
+        [Display(Name = "Full Coverage Insurance")]
         public bool CoverageType { get; set; }
-        public Nullable<decimal> MonthlyRate { get; set; }
-        public Nullable<decimal> YearlyRate { get; set; }
 
-        public Insuree()
-        { }
+        [Display(Name = "Click Button To Remove From Email List")]
+        public Nullable<System.DateTime> DoNotEmail { get; set; }
 
-        public Insuree(InsureeVM insureeVm)
-        {
-            InsureeId = insureeVm.VmInsureeId;
-            FirstName = insureeVm.VmFirstName;
-            LastName = insureeVm.VmLastName;
-            EmailAddress = insureeVm.VmEmailAddress;
-            DateOfBirth = insureeVm.VmDateOfBirth;
-            AutoYear = insureeVm.VmAutoYear;
-            AutoMake = insureeVm.VmAutoMake;
-            AutoModel = insureeVm.VmAutoModel;
-            SpeedingTickets = insureeVm.VmSpeedingTickets;
-            DUI = insureeVm.VmDUI;
-            CoverageType = insureeVm.VmCoverageType;
-            MonthlyRate = insureeVm.VmMonthlyRate;
-            YearlyRate = insureeVm.VmYearlyRate;
-        }
-
-        public Insuree(int insureeId, string firstName, string lastName, string emailAddress,
-                       DateTime dateOfBirth, int autoYear, string autoMake, string autoModel, int speedingTickets, bool dui, bool coverageType,
-                       decimal monthlyRate, decimal yearlyRate)
-        {
-
-        }
-
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AutoQuote> AutoQuotes { get; set; }
     }
 }

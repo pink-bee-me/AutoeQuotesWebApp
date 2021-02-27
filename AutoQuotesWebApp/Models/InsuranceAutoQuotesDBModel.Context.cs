@@ -13,10 +13,10 @@ namespace AutoQuotesWebApp.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AutoQuotesDBEntities1 : DbContext
+    public partial class AutoQuotesDBEntities : DbContext
     {
-        public AutoQuotesDBEntities1()
-            : base("name=AutoQuotesDBEntities1")
+        public AutoQuotesDBEntities()
+            : base("name=AutoQuotesDBEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace AutoQuotesWebApp.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AutoQuote> AutoQuotes { get; set; }
         public virtual DbSet<Insuree> Insurees { get; set; }
     }
 }

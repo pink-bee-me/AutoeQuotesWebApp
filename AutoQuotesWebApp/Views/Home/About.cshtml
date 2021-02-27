@@ -8,22 +8,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="~/Content/styles_HomeAboutPage.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body id="HomeAboutPageBodyContainer">
   <div id="ColorOverlay">
     <div id="ImageTextOverlay">
       <div class="jumbotron">
-
+        <h2 id="Question">The Question:</h2>
         <h1 id="BetterDeal" style="font-size:4em;">Can you get a better deal on your auto insurance?</h1>
 
-        <h3 id="Yes">The answer is... YES, Absolutely!!!</h3>
+        <h2 id="Answer">The Answer: </h2>
+        <h2 id="Yes">
+          YES,... Absolutely!!!</h2>
+         <h2 id="RightPlace"> you've definitely come to the right place!
+        </h2>
         <br/><br/> 
-        <h2 id="RightPlace">Welcome to...</h2>
+        <h2 id="Solution">The Solution:</h2>
         <h1 id="CompanyName">The Auto Insurance Connection</h1>
-        <h2 id="RightPlace2">you've definitely come to the right place!</h2><br /><br />
           <br />
           <div id="MainContent">
           
@@ -45,15 +48,15 @@
               <p>A top-notch Auto Inurance Solution that is custom-made and tailor-fit just for you!</p>
             </div>
           </div>
+        <h2 id="Conclusion">The Conclusion:</h2>
           <h2 id="Life">Life is like the ultimate "Road Trip", where each person chooses their own path...<br />The personal experience is therefore unique and so are the insurance needs of each traveler!!!<br />So let's sit back, take a minute, and then do yourself a favor...</h2><br />
           <h3 id="Join"> Join US! and Let The Good Times Roll...</h3>
           <div id="FreeQuoteButton">
-            @Html.ActionLink("Get Your Free Quote Today!", "NewInsureeFormData", "Insuree", new { @class = "font-size:1.5em; color:white;" })
-     </div>
+            @Html.ActionLink("Get Your Free Quote Today!", "Create", "Insurees") 
         </div>
       </div>
       </div>
-
+    </div>
 </body>
 </html>
 

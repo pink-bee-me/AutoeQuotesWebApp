@@ -133,37 +133,38 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AutoQuotesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsureesController.cs" />
+    <Compile Include="Data\AutoQuotedEntityModel\Context.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AutoQuotesEntityModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AutoQuotesEntityModel.Context.tt</DependentUpon>
+    <Compile Include="Models\AutoQuote.cs">
+      <DependentUpon>InsuranceAutoQuotesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AutoQuotesEntityModel.cs">
+    <Compile Include="Models\InsuranceAutoQuotesDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AutoQuotesEntityModel.tt</DependentUpon>
+      <DependentUpon>InsuranceAutoQuotesDBModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AutoQuotesEntityModel.Designer.cs">
+    <Compile Include="Models\InsuranceAutoQuotesDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AutoQuotesEntityModel.edmx</DependentUpon>
+      <DependentUpon>InsuranceAutoQuotesDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InsuranceAutoQuotesDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InsuranceAutoQuotesDBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Insuree.cs">
-      <DependentUpon>AutoQuotesEntityModel.tt</DependentUpon>
+      <DependentUpon>InsuranceAutoQuotesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\InsureeVM.cs" />
+    <Compile Include="Models\ViewModels\AutoQuoteInsuree_AdminViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\AutoQuotesDB.mdf" />
-    <Content Include="App_Data\AutoQuotesDB_log.ldf">
-      <DependentUpon>AutoQuotesDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -236,15 +237,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\AutoQuotesEntityModel.Context.tt">
+    <Content Include="Models\InsuranceAutoQuotesDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AutoQuotesEntityModel.edmx</DependentUpon>
-      <LastGenOutput>AutoQuotesEntityModel.Context.cs</LastGenOutput>
+      <DependentUpon>InsuranceAutoQuotesDBModel.edmx</DependentUpon>
+      <LastGenOutput>InsuranceAutoQuotesDBModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\AutoQuotesEntityModel.tt">
+    <Content Include="Models\InsuranceAutoQuotesDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AutoQuotesEntityModel.edmx</DependentUpon>
-      <LastGenOutput>AutoQuotesEntityModel.cs</LastGenOutput>
+      <DependentUpon>InsuranceAutoQuotesDBModel.edmx</DependentUpon>
+      <LastGenOutput>InsuranceAutoQuotesDBModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -270,12 +271,12 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="libman.json" />
-    <EntityDeploy Include="Models\AutoQuotesEntityModel.edmx">
+    <EntityDeploy Include="Models\InsuranceAutoQuotesDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AutoQuotesEntityModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>InsuranceAutoQuotesDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\AutoQuotesEntityModel.edmx.diagram">
-      <DependentUpon>AutoQuotesEntityModel.edmx</DependentUpon>
+    <Content Include="Models\InsuranceAutoQuotesDBModel.edmx.diagram">
+      <DependentUpon>InsuranceAutoQuotesDBModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
@@ -389,12 +390,20 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Insurees\PostYesSuccess.cshtml" />
     <Content Include="Views\Insurees\Details.cshtml" />
-    <Content Include="Views\Insurees\Create.cshtml" />
     <Content Include="Views\Insurees\Delete.cshtml" />
     <Content Include="Views\Insurees\Edit.cshtml" />
     <Content Include="Views\Insurees\Index.cshtml" />
+    <Content Include="Views\Insurees\CalculateAutoquote.cshtml" />
+    <Content Include="Views\AutoQuotes\Create.cshtml" />
+    <Content Include="Views\AutoQuotes\Delete.cshtml" />
+    <Content Include="Views\AutoQuotes\Details.cshtml" />
+    <Content Include="Views\AutoQuotes\Edit.cshtml" />
+    <Content Include="Views\AutoQuotes\Index.cshtml" />
+    <Content Include="Views\Insurees\Create.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
