@@ -1,0 +1,114 @@
+﻿@model AutoQuotesWebApp.Models.Insuree
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>QuoteInsuree</title>
+</head>
+<body>
+    <div>
+        <h4>Insuree</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EmailAddress)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DateOfBirth)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AutoYear)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AutoYear)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AutoMake)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AutoMake)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AutoModel)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AutoModel)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SpeedingTickets)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SpeedingTickets)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DUI)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DUI)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CoverageType)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CoverageType)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DoNotEmail)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DoNotEmail)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Get Auto Quote", "CalculateAutoQuote", "AutoQuotes",new { InsureeId = Model.InsureeId },null) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

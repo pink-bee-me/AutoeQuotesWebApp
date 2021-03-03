@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AutoQuotesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="InsuranceQuoteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AutoQuotes">
           <Key>
             <PropertyRef Name="AutoQuoteId" />
           </Key>
-          <Property Name="AutoQuoteId" Type="int" Nullable="false" />
+          <Property Name="AutoQuoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="QuoteGenerationDate" Type="datetime" Nullable="false" />
           <Property Name="InsureeId" Type="int" Nullable="false" />
           <Property Name="BaseRate" Type="money" Nullable="false" />
@@ -33,7 +33,7 @@
           <Key>
             <PropertyRef Name="InsureeId" />
           </Key>
-          <Property Name="InsureeId" Type="int" Nullable="false" />
+          <Property Name="InsureeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -46,7 +46,7 @@
           <Property Name="CoverageType" Type="bit" Nullable="false" />
           <Property Name="DoNotEmail" Type="datetime" />
         </EntityType>
-        <Association Name="FK_AutoQuotes_InsureeId">
+        <Association Name="FK_AutoQuotes_InsureeID">
           <End Role="Insurees" Type="Self.Insurees" Multiplicity="1" />
           <End Role="AutoQuotes" Type="Self.AutoQuotes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -58,23 +58,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AutoQuotesDBModelStoreContainer">
+        <EntityContainer Name="InsuranceQuoteDBModelStoreContainer">
           <EntitySet Name="AutoQuotes" EntityType="Self.AutoQuotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Insurees" EntityType="Self.Insurees" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AutoQuotes_InsureeId" Association="Self.FK_AutoQuotes_InsureeId">
+          <AssociationSet Name="FK_AutoQuotes_InsureeID" Association="Self.FK_AutoQuotes_InsureeID">
             <End Role="Insurees" EntitySet="Insurees" />
             <End Role="AutoQuotes" EntitySet="AutoQuotes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AutoQuotesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="InsuranceQuoteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AutoQuote">
           <Key>
             <PropertyRef Name="AutoQuoteId" />
           </Key>
-          <Property Name="AutoQuoteId" Type="Int32" Nullable="false" />
+          <Property Name="AutoQuoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="QuoteGenerationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="InsureeId" Type="Int32" Nullable="false" />
           <Property Name="BaseRate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
@@ -93,13 +94,13 @@
           <Property Name="SubtotalAfterCoverageCalc" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="MonthlyQuoteRate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="YearlyQuoteRate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="Insuree" Relationship="Self.FK_AutoQuotes_InsureeId" FromRole="AutoQuotes" ToRole="Insurees" />
+          <NavigationProperty Name="Insuree" Relationship="Self.FK_AutoQuotes_InsureeID" FromRole="AutoQuotes" ToRole="Insurees" />
         </EntityType>
         <EntityType Name="Insuree">
           <Key>
             <PropertyRef Name="InsureeId" />
           </Key>
-          <Property Name="InsureeId" Type="Int32" Nullable="false" />
+          <Property Name="InsureeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
@@ -110,10 +111,10 @@
           <Property Name="SpeedingTickets" Type="Int32" Nullable="false" />
           <Property Name="DUI" Type="Boolean" Nullable="false" />
           <Property Name="CoverageType" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AutoQuotes" Relationship="Self.FK_AutoQuotes_InsureeId" FromRole="Insurees" ToRole="AutoQuotes" />
           <Property Name="DoNotEmail" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AutoQuotes" Relationship="Self.FK_AutoQuotes_InsureeID" FromRole="Insurees" ToRole="AutoQuotes" />
         </EntityType>
-        <Association Name="FK_AutoQuotes_InsureeId">
+        <Association Name="FK_AutoQuotes_InsureeID">
           <End Role="Insurees" Type="Self.Insuree" Multiplicity="1" />
           <End Role="AutoQuotes" Type="Self.AutoQuote" Multiplicity="*" />
           <ReferentialConstraint>
@@ -125,10 +126,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AutoQuotesDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="InsuranceQuoteDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AutoQuotes" EntityType="Self.AutoQuote" />
           <EntitySet Name="Insurees" EntityType="Self.Insuree" />
-          <AssociationSet Name="FK_AutoQuotes_InsureeId" Association="Self.FK_AutoQuotes_InsureeId">
+          <AssociationSet Name="FK_AutoQuotes_InsureeID" Association="Self.FK_AutoQuotes_InsureeID">
             <End Role="Insurees" EntitySet="Insurees" />
             <End Role="AutoQuotes" EntitySet="AutoQuotes" />
           </AssociationSet>
@@ -138,11 +139,10 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AutoQuotesDBModelStoreContainer" CdmEntityContainer="AutoQuotesDBEntities">
+        <EntityContainerMapping StorageEntityContainer="InsuranceQuoteDBModelStoreContainer" CdmEntityContainer="InsuranceQuoteDBEntities">
           <EntitySetMapping Name="AutoQuotes">
-            <EntityTypeMapping TypeName="AutoQuotesDBModel.AutoQuote">
+            <EntityTypeMapping TypeName="InsuranceQuoteDBModel.AutoQuote">
               <MappingFragment StoreEntitySet="AutoQuotes">
-                <ScalarProperty Name="IsPorscheRate" ColumnName="IsPorscheRate" />
                 <ScalarProperty Name="AutoQuoteId" ColumnName="AutoQuoteId" />
                 <ScalarProperty Name="QuoteGenerationDate" ColumnName="QuoteGenerationDate" />
                 <ScalarProperty Name="InsureeId" ColumnName="InsureeId" />
@@ -152,6 +152,7 @@
                 <ScalarProperty Name="AgeOver25Rate" ColumnName="AgeOver25Rate" />
                 <ScalarProperty Name="AutoYearBefore2000Rate" ColumnName="AutoYearBefore2000Rate" />
                 <ScalarProperty Name="AutoYearAfter2015Rate" ColumnName="AutoYearAfter2015Rate" />
+                <ScalarProperty Name="IsPorscheRate" ColumnName="IsPorscheRate" />
                 <ScalarProperty Name="IsCarreraRate" ColumnName="IsCarreraRate" />
                 <ScalarProperty Name="SpeedingTicketsRate" ColumnName="SpeedingTicketsRate" />
                 <ScalarProperty Name="SubtotalBeforeDuiCalc" ColumnName="SubtotalBeforeDuiCalc" />
@@ -165,9 +166,8 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Insurees">
-            <EntityTypeMapping TypeName="AutoQuotesDBModel.Insuree">
+            <EntityTypeMapping TypeName="InsuranceQuoteDBModel.Insuree">
               <MappingFragment StoreEntitySet="Insurees">
-                <ScalarProperty Name="DoNotEmail" ColumnName="DoNotEmail" />
                 <ScalarProperty Name="InsureeId" ColumnName="InsureeId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -179,6 +179,7 @@
                 <ScalarProperty Name="SpeedingTickets" ColumnName="SpeedingTickets" />
                 <ScalarProperty Name="DUI" ColumnName="DUI" />
                 <ScalarProperty Name="CoverageType" ColumnName="CoverageType" />
+                <ScalarProperty Name="DoNotEmail" ColumnName="DoNotEmail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

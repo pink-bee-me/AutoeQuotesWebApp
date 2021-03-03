@@ -9,7 +9,7 @@ namespace AutoQuotesWebApp.Controllers
 {
     public class AutoQuotesController : Controller
     {
-        readonly AutoQuotesDBEntities autoQuotesDB = new AutoQuotesDBEntities();
+        public AutoQuotesDBEntities autoQuotesDB = new AutoQuotesDBEntities();
 
         // GET: AutoQuotes
         public ActionResult Index()
@@ -38,22 +38,12 @@ namespace AutoQuotesWebApp.Controllers
             //create instance of insuree and then give it the values of the newly created insuree from the insurees
             //controller that were passed via TempData["InfoInsureeID"] (the newly created insuree id#) after converting that data to Int32 type
             // this is done so we can use the isurees info to calculate the autoQuote
-            var insuree = new Insuree();
-            int id = Convert.ToInt32(TempData["InfoInsureeId"]);
-            insuree.InsureeId = id;
-            insuree = autoQuotesDB.Insurees.Find(id);
+            Insuree insuree = (Insuree)TempData["insuree"];
 
             //create a new autoQuote instance
-            AutoQuote autoQuote = new AutoQuote(insuree)
-            {
-
-                //assign the insuree.InsureeId value the autoQuote.InsureeId (so they will be the same)
-                InsureeId = insuree.InsureeId
-            };
-
+            AutoQuote autoQuote = new AutoQuote();
 
             //set QuoteGenerationDate
-
             autoQuote.QuoteGenerationDate = DateTime.Now;
 
             // figure BaseRate for AutoQuote Insurance Rate Calculation
@@ -62,14 +52,12 @@ namespace AutoQuotesWebApp.Controllers
 
             //figure AutoQuote Rate values that are based on the DateOfBirth value gathered from the InsureeController "Create" ActionResult
             int age = DateTime.Now.Year - insuree.DateOfBirth.Year;
-
             if (insuree.DateOfBirth.Month > DateTime.Now.Month
             || insuree.DateOfBirth.Month == DateTime.Now.Month
             && insuree.DateOfBirth.Day > DateTime.Now.Day)
             {
                 age--;
             }
-
             var insureeAge = Convert.ToInt32(age);
             double under18 = (insureeAge < 18) ? 100.00 : 0.00;
             double btwn19and25 = ((insureeAge > 18) && (age <= 25)) ? 50.00 : 0.00;

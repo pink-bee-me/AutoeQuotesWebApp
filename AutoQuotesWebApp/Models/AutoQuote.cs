@@ -9,6 +9,9 @@
 
 namespace AutoQuotesWebApp.Models
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class AutoQuote
     {
         public int AutoQuoteId { get; set; }
@@ -30,12 +33,7 @@ namespace AutoQuotesWebApp.Models
         public decimal SubtotalAfterCoverageCalc { get; set; }
         public decimal MonthlyQuoteRate { get; set; }
         public decimal YearlyQuoteRate { get; set; }
-
+    
         public virtual Insuree Insuree { get; set; }
-
-        public AutoQuote(Insuree insuree)
-        {
-
-        }
     }
 }

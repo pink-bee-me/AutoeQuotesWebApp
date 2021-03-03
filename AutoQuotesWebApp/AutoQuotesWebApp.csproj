@@ -400,6 +400,7 @@
     <Content Include="Views\AutoQuotes\Edit.cshtml" />
     <Content Include="Views\AutoQuotes\Index.cshtml" />
     <Content Include="Views\Insurees\Create.cshtml" />
+    <Content Include="Views\Insurees\QuoteInsuree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

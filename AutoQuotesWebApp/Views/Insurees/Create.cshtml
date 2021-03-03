@@ -30,13 +30,6 @@
 
             <h2 id="EnterInfo">Insuree Information Form</h2>
             <hr />
-
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div id="HiddenInsureeIdField" class="form-group">
-              @Html.HiddenFor(model => model.InsureeId)
-            </div>
-
             <div class="form-group">
               @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
               <div class="col-md-10 insureeDataField">
@@ -115,15 +108,10 @@
                @Html.LabelFor(model => model.CoverageType, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
               <div id="CoverageCheckBox" class="col-md-10 insureeDataField">
                 @Html.EditorFor(model => model.DUI, new
-           { htmlAttributes = new { @class = "form-control insureeDataField"}})
+           { htmlAttributes = new { @class = "form-control insureeDataField" } })
                           @Html.ValidationMessageFor(model => model.CoverageType, "", new { @class = "text-danger" })
               </div>
               </div>
-              <div class="form-group hiddenGroup">
-                @Html.HiddenFor(model => model.DoNotEmail)
-              </div>
-
-            </div>
         <div id="FormSubmitButton" class="form-group">
               <div class="col-md-offset-2 col-md-10 btn btn-block">
           
@@ -137,10 +125,11 @@
               @Html.ActionLink("Follow Me", "About", "Home")
             </div>
           
-          }
+      </div>
+        }
+        </div>
       </div>
     </div>
-  </div>
   <script src="~/Scripts/jquery-ui.js"></script>
 </body>
 </html> 

@@ -13,10 +13,10 @@ namespace AutoQuotesWebApp.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AutoQuotesDBEntities : DbContext
+    public partial class InsuranceQuoteDBEntities : DbContext
     {
-        public AutoQuotesDBEntities()
-            : base("name=AutoQuotesDBEntities")
+        public InsuranceQuoteDBEntities()
+            : base("name=InsuranceQuoteDBEntities")
         {
         }
     

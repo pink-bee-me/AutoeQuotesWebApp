@@ -36,7 +36,7 @@ namespace AutoQuotesWebApp.Controllers
         {
             var insuree = new Insuree();
 
-            return View(insuree);
+            return View("Create", insuree);
         }
 
         // POST: Insurees/Create
@@ -46,23 +46,23 @@ namespace AutoQuotesWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "InsureeId,FirstName,LastName,EmailAddress," +
             "DateOfBirth,AutoYear,AutoMake,AutoModel,SpeedingTickets,DUI," +
-            "CoverageType,MonthlyRate,YearlyRate")] Insuree insuree)
+            "CoverageType")] Insuree insuree)
         {
-
 
             if (ModelState.IsValid)
             {
 
                 autoQuotesDB.Insurees.Add(insuree);
                 autoQuotesDB.SaveChanges();
+                TempData["insuree"] = insuree;
 
 
-
-                return RedirectToAction("CalculateAutoQuote", "AutoQuotes");
             }
-
-            return View();
+            return RedirectToAction("CalculateAutoQuote", "AutoQuotes");
         }
+
+
+
 
         // GET: Insurees/Edit/5
         public ActionResult Edit(int? id)
