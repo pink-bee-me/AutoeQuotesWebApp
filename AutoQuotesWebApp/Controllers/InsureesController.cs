@@ -1,4 +1,5 @@
 ﻿using AutoQuotesWebApp.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -8,12 +9,12 @@ namespace AutoQuotesWebApp.Controllers
 {
     public class InsureesController : Controller
     {
-        private AutoQuotesDBEntities autoQuotesDB = new AutoQuotesDBEntities();
+        private InsuranceQuoteDBModelsContext insuranceQuoteDB = new InsuranceQuoteDBModelsContext();
 
         // GET: Insurees
         public ActionResult Index()
         {
-            return View(autoQuotesDB.Insurees.ToList());
+            return View(insuranceQuoteDB.Insurees.ToList());
         }
 
         // GET: Insurees/Details/5
@@ -23,7 +24,7 @@ namespace AutoQuotesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Insuree insuree = autoQuotesDB.Insurees.Find(id);
+            Insuree insuree = insuranceQuoteDB.Insurees.Find(id);
             if (insuree == null)
             {
                 return HttpNotFound();
@@ -36,7 +37,7 @@ namespace AutoQuotesWebApp.Controllers
         {
             var insuree = new Insuree();
 
-            return View("Create", insuree);
+            return View(insuree);
         }
 
         // POST: Insurees/Create
@@ -44,25 +45,137 @@ namespace AutoQuotesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InsureeId,FirstName,LastName,EmailAddress," +
+        public ActionResult Create([Bind(Include = "FirstName,LastName,EmailAddress," +
             "DateOfBirth,AutoYear,AutoMake,AutoModel,SpeedingTickets,DUI," +
             "CoverageType")] Insuree insuree)
         {
 
             if (ModelState.IsValid)
             {
+                insuranceQuoteDB.Insurees.Add(insuree);
+                insuranceQuoteDB.SaveChanges();
+                insuree = insuranceQuoteDB.Insurees.Where(c => c.EmailAddress == insuree.EmailAddress).FirstOrDefault();
+                var newId = insuree.InsureeId;
 
-                autoQuotesDB.Insurees.Add(insuree);
-                autoQuotesDB.SaveChanges();
                 TempData["insuree"] = insuree;
 
-
+                return RedirectToAction("FigureQuoteCalculations", "Insurees");
             }
-            return RedirectToAction("CalculateAutoQuote", "AutoQuotes");
+            return View();
         }
 
+        //Get Insuree Data
+        //Send new instance of Insuree's data to be used to figure the calculations to be placed in the AutoQuote to 
+        public ActionResult FigureQuoteCalculations()
+        {
+            var insuree = new Insuree();
+
+            if (TempData.ContainsKey("InsureeId"))
+                insuree.InsureeId = Convert.ToInt32(TempData["InsureeId"]);
+            if (TempData.ContainsKey("FirstName"))
+                insuree.FirstName = TempData["FirstName"].ToString();
+            if (TempData.ContainsKey("LastName"))
+                insuree.LastName = TempData["LastName"].ToString();
+            if (TempData.ContainsKey("EmailAddress"))
+                insuree.EmailAddress = TempData["EmailAddress"].ToString();
+            if (TempData.ContainsKey("DateOfBirth"))
+                insuree.DateOfBirth = Convert.ToDateTime(TempData["DateOfBirth"]);
+            if (TempData.ContainsKey("AutoYear"))
+                insuree.AutoYear = Convert.ToInt32(TempData["AutoYear"]);
+            if (TempData.ContainsKey("AutoMake"))
+                insuree.AutoMake = TempData["AutoMake"].ToString();
+            if (TempData.ContainsKey("AutoModel"))
+                insuree.AutoModel = TempData["AutoModel"].ToString();
+            if (TempData.ContainsKey("SpeedingTickets"))
+                insuree.SpeedingTickets = Convert.ToInt32(TempData["SpeedingTickets"]);
+            if (TempData.ContainsKey("DUI"))
+                insuree.DUI = Convert.ToBoolean(TempData["DUI"]);
+            if (TempData.ContainsKey("CoverageType"))
+                insuree.CoverageType = Convert.ToBoolean(TempData["CoverageType"]);
+
+            //Now we will use the properties from the insuree model and build a new autoQuote
+            var autoQuote = new AutoQuote();
+            autoQuote.InsureeId = insuree.InsureeId;
+            //set QuoteGenerationDate
+            autoQuote.QuoteGenerationDate = DateTime.Now;
+
+            // figure BaseRate for AutoQuote Insurance Rate Calculation
+            double baseRate = 50.00;
+            autoQuote.BaseRate = Convert.ToDecimal(baseRate);
+
+            //figure AutoQuote Rate values that are based on the DateOfBirth value gathered from the InsureeController "Create" ActionResult
+            int age = DateTime.Now.Year - insuree.DateOfBirth.Year;
+            if (insuree.DateOfBirth.Month > DateTime.Now.Month
+            || insuree.DateOfBirth.Month == DateTime.Now.Month
+            && insuree.DateOfBirth.Day > DateTime.Now.Day)
+            {
+                age--;
+            }
+            var insureeAge = Convert.ToInt32(age);
+            double under18 = (insureeAge < 18) ? 100.00 : 0.00;
+            double btwn19and25 = ((insureeAge > 18) && (age <= 25)) ? 50.00 : 0.00;
+            double over25 = (insureeAge > 25) ? 25.00 : 0.00;
+
+            autoQuote.AgeUnder18Rate = Convert.ToDecimal(under18);
+            autoQuote.AgeBtwn19and25Rate = Convert.ToDecimal(btwn19and25);
+            autoQuote.AgeOver25Rate = Convert.ToDecimal(over25);
 
 
+            //figure Insurance Rate Calc Values that are based on the year of the vehicle
+            double autoYearBefore2000 = (insuree.AutoYear > 2000 && insuree.AutoYear < 2015) ? 0.00 : 25.00;
+            double autoYearAfter2015 = (insuree.AutoYear > 2015) ? 25.00 : 0.00;
+
+            autoQuote.AutoYearBefore2000Rate = Convert.ToDecimal(autoYearBefore2000);
+            autoQuote.AutoYearAfter2015Rate = Convert.ToDecimal(autoYearAfter2015);
+
+
+            //figure Insurance Rate Calc Values based on if the vehicle is a Porsche Carerra
+            double yesIsPorsche = (insuree.AutoMake == "Porsche") ? 25.00 : 0.00;
+            double yesIsCarrera = (insuree.AutoModel == "Carrera") ? 25.00 : 0.00;
+
+            autoQuote.IsPorscheRate = Convert.ToDecimal(yesIsPorsche);
+            autoQuote.IsCarreraRate = Convert.ToDecimal(yesIsCarrera);
+
+            //figure Insurance Rate Calc for the number of speeding tickets the Insuree has on record
+            int tickets = insuree.SpeedingTickets;
+            int ticketRate = tickets * 10;
+            double speedingTicketsRate = Convert.ToDouble(ticketRate);
+
+            autoQuote.SpeedingTicketsRate = Convert.ToDecimal(speedingTicketsRate);
+
+
+            //Calculate Subtotal to check for accuracy before DUI calculation
+            double subtotalBeforeDUI = baseRate + under18 + btwn19and25 + over25 +
+                                       autoYearBefore2000 + autoYearAfter2015 + yesIsPorsche +
+                                       yesIsCarrera + speedingTicketsRate;
+            autoQuote.SubtotalBeforeDuiCalc = Convert.ToDecimal(subtotalBeforeDUI);
+
+            //figure Insurance Rate Calc based on if the Insuree has a DUI on their record
+            int yesDUI = (insuree.DUI == true) ? 1 : 0;
+            double twentyFivePercent = 0.25;
+            decimal TwentyFivePercent = Convert.ToDecimal(twentyFivePercent);
+            decimal duiRate = (yesDUI == 1) ? (decimal.Multiply(autoQuote.SubtotalBeforeDuiCalc, TwentyFivePercent)) : Convert.ToDecimal(0.00);
+            autoQuote.DuiRateUp25Percent = duiRate; // value that will be placed in Quote DuiRateUp25Percent
+
+            //figure Insurance Rate Calc after DUI Rate is computed and added to running sum of rates 
+            autoQuote.SubtotalAfterDuiCalc = autoQuote.SubtotalBeforeDuiCalc + autoQuote.DuiRateUp25Percent;
+
+            //figure Insurance Rate Calc based on whether the Insuree needs full coverage insurance or not
+            int coverageType = (insuree.CoverageType == true) ? 1 : 0;
+            double fiftyPercent = 0.50;
+            decimal FiftyPercent = Convert.ToDecimal(fiftyPercent);
+            autoQuote.CoverageTypeRateUp50Percent = (coverageType == 1) ? (decimal.Multiply(autoQuote.SubtotalAfterDuiCalc, FiftyPercent)) : Convert.ToDecimal(0.00);// calculating the rate of increase if FullCoverage is true
+            autoQuote.SubtotalAfterCoverageCalc = autoQuote.SubtotalAfterDuiCalc + autoQuote.CoverageTypeRateUp50Percent;
+
+            //figure Insurance Rate per Month
+            autoQuote.MonthlyQuoteRate = autoQuote.SubtotalAfterCoverageCalc;
+
+            //figure Insurance Rate per Year
+            autoQuote.YearlyQuoteRate = decimal.Multiply(autoQuote.MonthlyQuoteRate, Convert.ToDecimal(12));
+
+            // return autoQuote To View
+            return View();
+        }
 
         // GET: Insurees/Edit/5
         public ActionResult Edit(int? id)
@@ -71,7 +184,7 @@ namespace AutoQuotesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Insuree insuree = autoQuotesDB.Insurees.Find(id);
+            Insuree insuree = insuranceQuoteDB.Insurees.Find(id);
             if (insuree == null)
             {
                 return HttpNotFound();
@@ -88,8 +201,8 @@ namespace AutoQuotesWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                autoQuotesDB.Entry(insuree).State = EntityState.Modified;
-                autoQuotesDB.SaveChanges();
+                insuranceQuoteDB.Entry(insuree).State = EntityState.Modified;
+                insuranceQuoteDB.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(insuree);
@@ -102,7 +215,7 @@ namespace AutoQuotesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Insuree insuree = autoQuotesDB.Insurees.Find(id);
+            Insuree insuree = insuranceQuoteDB.Insurees.Find(id);
             if (insuree == null)
             {
                 return HttpNotFound();
@@ -115,9 +228,9 @@ namespace AutoQuotesWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Insuree insuree = autoQuotesDB.Insurees.Find(id);
-            autoQuotesDB.Insurees.Remove(insuree);
-            autoQuotesDB.SaveChanges();
+            Insuree insuree = insuranceQuoteDB.Insurees.Find(id);
+            insuranceQuoteDB.Insurees.Remove(insuree);
+            insuranceQuoteDB.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -125,7 +238,7 @@ namespace AutoQuotesWebApp.Controllers
         {
             if (disposing)
             {
-                autoQuotesDB.Dispose();
+                insuranceQuoteDB.Dispose();
             }
             base.Dispose(disposing);
         }

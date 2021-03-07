@@ -21,10 +21,10 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.AutoQuoteDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.QuoteGenerationDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.AutoQuoteDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.AutoQuoteDateTime, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.QuoteGenerationDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.QuoteGenerationDate, "", new { @class = "text-danger" })
                 </div>
             </div>
     
@@ -141,10 +141,10 @@
             </div>
     
             <div class="form-group">
-                @Html.LabelFor(model => model.SubtotalAfterCoverageTypeCalc, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.SubtotalAfterCoverageCalc, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.SubtotalAfterCoverageTypeCalc, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SubtotalAfterCoverageTypeCalc, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.SubtotalAfterCoverageCalc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubtotalAfterCoverageCalc, "", new { @class = "text-danger" })
                 </div>
             </div>
     

@@ -126,7 +126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="InsuranceQuoteDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="InsuranceQuoteDBContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AutoQuotes" EntityType="Self.AutoQuote" />
           <EntitySet Name="Insurees" EntityType="Self.Insuree" />
           <AssociationSet Name="FK_AutoQuotes_InsureeID" Association="Self.FK_AutoQuotes_InsureeID">
@@ -139,7 +139,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="InsuranceQuoteDBModelStoreContainer" CdmEntityContainer="InsuranceQuoteDBEntities">
+        <EntityContainerMapping StorageEntityContainer="InsuranceQuoteDBModelStoreContainer" CdmEntityContainer="InsuranceQuoteDBContext">
           <EntitySetMapping Name="AutoQuotes">
             <EntityTypeMapping TypeName="InsuranceQuoteDBModel.AutoQuote">
               <MappingFragment StoreEntitySet="AutoQuotes">
