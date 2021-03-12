@@ -1,0 +1,163 @@
+﻿@using AutoQuotesWebApp.ViewModels;
+@model IEnumerable<QuoteItemizationVM> 
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>AutoQuote Rates Itemization:</title>
+</head>
+<body>
+  <div>
+    <div class="table-responsive">
+      <table class="table table-stripe cellspacing:5px">
+        <tr>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.InsureeId)
+
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.FirstName)
+
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.LastName)
+
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.EmailAddress)
+
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.AutoYear)
+
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.AutoMake)
+
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.AutoModel)
+
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.SpeedingTickets)
+
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.DUI)
+          </th>
+
+          <th>
+
+            @Html.DisplayNameFor(model => model.CoverageType)
+          </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+          <tr>
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.InsureeId)
+
+            </td>
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.FirstName)
+
+            </td>
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.LastName)
+
+            </td>
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.EmailAddress)
+
+            </td>
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.DateOfBirth)
+
+            </td>
+
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.AutoYear)
+
+            </td>
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.AutoMake)
+
+            </td>
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.AutoModel)
+
+            </td>
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.SpeedingTickets)
+
+            </td>
+
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.DUI)
+
+            </td>
+
+            <td>
+
+              @Html.DisplayFor(modelItem => item.CoverageType)
+
+            </td>
+          </tr>
+        }
+      </table>
+    </div>
+  </div>
+</body>
+</html>

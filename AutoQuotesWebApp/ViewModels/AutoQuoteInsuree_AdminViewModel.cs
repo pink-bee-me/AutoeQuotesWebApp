@@ -1,7 +1,7 @@
 ﻿using AutoQuotesWebApp.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace AutoQuotesWebApp
+namespace AutoQuotesWebApp.ViewModels
 {
     public class AutoQuoteInsuree_AdminViewModel
     {

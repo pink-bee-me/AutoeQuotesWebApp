@@ -160,8 +160,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_InsuranceQuoteDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModels\Admin\AutoQuoteInsuree_AdminViewModel.cs" />
-    <Compile Include="Models\ViewModels\FigureQuoteCalculations\FigureQuoteCalculations_ViewModel.cs" />
+    <Compile Include="ViewModels\AutoQuoteInsuree_AdminViewModel.cs" />
+    <Compile Include="ViewModels\QuoteItemizationVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -394,13 +394,14 @@
     <Content Include="Views\Insurees\Edit.cshtml" />
     <Content Include="Views\Insurees\Index.cshtml" />
     <Content Include="Views\Insurees\CalculateAutoquote.cshtml" />
-    <Content Include="Views\AutoQuotes\Create.cshtml" />
     <Content Include="Views\AutoQuotes\Delete.cshtml" />
     <Content Include="Views\AutoQuotes\Details.cshtml" />
     <Content Include="Views\AutoQuotes\Edit.cshtml" />
     <Content Include="Views\AutoQuotes\Index.cshtml" />
     <Content Include="Views\Insurees\Create.cshtml" />
     <Content Include="Views\Insurees\QuoteInsuree.cshtml" />
+    <Content Include="Views\AutoQuotes\Create.cshtml" />
+    <Content Include="Views\AutoQuotes\QuoteItemization.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

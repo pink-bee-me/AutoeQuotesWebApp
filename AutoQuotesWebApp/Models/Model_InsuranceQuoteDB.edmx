@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InsuranceQuoteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InsuranceQuoteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AutoQuotes">
           <Key>
             <PropertyRef Name="AutoQuoteId" />
@@ -17,6 +17,7 @@
           <Property Name="AgeBtwn19and25Rate" Type="money" Nullable="false" />
           <Property Name="AgeOver25Rate" Type="money" Nullable="false" />
           <Property Name="AutoYearBefore2000Rate" Type="money" Nullable="false" />
+          <Property Name="AutoYearBtwn2000and2015Rate" Type="money" Nullable="false" />
           <Property Name="AutoYearAfter2015Rate" Type="money" Nullable="false" />
           <Property Name="IsPorscheRate" Type="money" Nullable="false" />
           <Property Name="IsCarreraRate" Type="money" Nullable="false" />
@@ -66,8 +67,7 @@
             <End Role="AutoQuotes" EntitySet="AutoQuotes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InsuranceQuoteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -83,6 +83,7 @@
           <Property Name="AgeBtwn19and25Rate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="AgeOver25Rate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="AutoYearBefore2000Rate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AutoYearBtwn2000and2015Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" DefaultValue="0.00" />
           <Property Name="AutoYearAfter2015Rate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="IsPorscheRate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="IsCarreraRate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
@@ -143,6 +144,7 @@
           <EntitySetMapping Name="AutoQuotes">
             <EntityTypeMapping TypeName="InsuranceQuoteDBModel.AutoQuote">
               <MappingFragment StoreEntitySet="AutoQuotes">
+                <ScalarProperty Name="AutoYearBtwn2000and2015Rate" ColumnName="AutoYearBtwn2000and2015Rate" />
                 <ScalarProperty Name="AutoQuoteId" ColumnName="AutoQuoteId" />
                 <ScalarProperty Name="QuoteGenerationDate" ColumnName="QuoteGenerationDate" />
                 <ScalarProperty Name="InsureeId" ColumnName="InsureeId" />

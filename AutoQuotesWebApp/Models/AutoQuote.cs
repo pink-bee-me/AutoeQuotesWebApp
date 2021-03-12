@@ -9,11 +9,16 @@
 
 namespace AutoQuotesWebApp.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class AutoQuote
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AutoQuote()
+        {
+            this.AutoYearBtwn2000and2015Rate = 0.00m;
+        }
+
         public int AutoQuoteId { get; set; }
         public System.DateTime QuoteGenerationDate { get; set; }
         public int InsureeId { get; set; }
@@ -22,6 +27,7 @@ namespace AutoQuotesWebApp.Models
         public decimal AgeBtwn19and25Rate { get; set; }
         public decimal AgeOver25Rate { get; set; }
         public decimal AutoYearBefore2000Rate { get; set; }
+        public decimal AutoYearBtwn2000and2015Rate { get; set; }
         public decimal AutoYearAfter2015Rate { get; set; }
         public decimal IsPorscheRate { get; set; }
         public decimal IsCarreraRate { get; set; }
@@ -33,7 +39,8 @@ namespace AutoQuotesWebApp.Models
         public decimal SubtotalAfterCoverageCalc { get; set; }
         public decimal MonthlyQuoteRate { get; set; }
         public decimal YearlyQuoteRate { get; set; }
-    
+
         public virtual Insuree Insuree { get; set; }
+        public virtual IEnumerable<AutoQuote> AutoQuotes { get; set; }
     }
 }
