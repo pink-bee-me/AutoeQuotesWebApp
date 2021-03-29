@@ -73,10 +73,10 @@ namespace AutoQuotesWebApp.ViewModels
         [Display(Name = "Yearly Payment Option (Pay Today and Save 20% !!!) :")]
         public decimal YearlyQuoteRate { get; set; }
 
-        public List<Insuree> Insurees { get; set; }
+        public List<InsureeVM> Insurees { get; set; }
         public List<AutoQuote> AutoQuotes { get; set; }
         public IEnumerable<QuoteItemizationVM> VmModels { get; set; }
-        
+
     }
 }
 

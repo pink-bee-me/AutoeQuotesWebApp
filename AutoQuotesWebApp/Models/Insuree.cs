@@ -9,18 +9,32 @@
 
 namespace AutoQuotesWebApp.Models
 {
+    using AutoQuotesWebApp.ViewModels;
     using System;
     using System.Collections.Generic;
 
     public partial class Insuree
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Insuree(Insuree id)
+        public Insuree(int id)
         {
-            this.AutoQuotes = new HashSet<AutoQuote>();
+            InsureeId = id;
         }
 
         public Insuree() { }
+
+        public Insuree(InsureeVM insureeVM)
+        {
+            FirstName = insureeVM.FirstName;
+            LastName = insureeVM.LastName;
+            EmailAddress = insureeVM.EmailAddress;
+            DateOfBirth = insureeVM.DateOfBirth;
+            AutoYear = insureeVM.AutoYear;
+            AutoMake = insureeVM.AutoMake;
+            AutoModel = insureeVM.AutoModel;
+            SpeedingTickets = insureeVM.SpeedingTickets;
+            DUI = insureeVM.DUI;
+            CoverageType = insureeVM.CoverageType;
+        }
 
         public int InsureeId { get; set; }
         public string FirstName { get; set; }
@@ -35,7 +49,7 @@ namespace AutoQuotesWebApp.Models
         public bool CoverageType { get; set; }
         public Nullable<System.DateTime> DoNotEmail { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AutoQuote> AutoQuotes { get; set; }
+        public virtual ICollection<Insuree> Insurees { get; set; }
     }
 }

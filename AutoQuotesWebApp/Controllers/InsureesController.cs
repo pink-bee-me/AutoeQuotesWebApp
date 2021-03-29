@@ -1,5 +1,5 @@
 ﻿using AutoQuotesWebApp.Models;
-using System;
+using AutoQuotesWebApp.ViewModels;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace AutoQuotesWebApp.Controllers
 {
+    [Route("/InsureeInfo")]
     public class InsureesController : Controller
     {
         private readonly InsuranceQuoteDBModelsContext db = new InsuranceQuoteDBModelsContext();
@@ -25,7 +26,9 @@ namespace AutoQuotesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Insuree insuree = db.Insurees.Find(id);
+
+            // var insuree = new Insuree();
+            var insuree = db.Insurees.Find(id);
             if (insuree == null)
             {
                 return HttpNotFound();
@@ -34,10 +37,11 @@ namespace AutoQuotesWebApp.Controllers
         }
 
         // GET: Insurees/Create
+        [HttpGet]
         public ActionResult Create()
         {
-            Insuree insuree = new Insuree();
-            return View(insuree);
+            var insureeVm = new InsureeVM();
+            return View();
         }
 
         // POST: Insurees/Create
@@ -47,121 +51,48 @@ namespace AutoQuotesWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "FirstName,LastName,EmailAddress," +
             "DateOfBirth,AutoYear,AutoMake,AutoModel,SpeedingTickets,DUI," +
-            "CoverageType")] Insuree insuree)
+            "CoverageType")] InsureeVM insureeVM)
         {
+            var insuree = new Insuree(insureeVM);
+
 
             if (ModelState.IsValid)
             {
                 db.Insurees.Add(insuree);
                 db.SaveChanges();
-                List<Insuree> Insurees = new List<Insuree>();
-                Insurees.Add(insuree);
-
             }
+            var id = insuree.InsureeId;
+            insuree = db.Insurees.Find(id);
 
+            List<Insuree> Insurees = new List<Insuree>();
+            Insurees.Add(insuree);
 
-            AutoQuote autoQuote = new AutoQuote();
-
-            //set QuoteGenerationDate
-            autoQuote.QuoteGenerationDate = DateTime.Now;
-
-
-            //set AutoQuote InsureeId to match Insuree InsureeId
-            //database does that????
-
-            //set BaseRate for AutoQuote
-            int baseRate = 50;
-            autoQuote.BaseRate = Convert.ToDecimal(baseRate);
-
-            //set AutoQuote Rate values that are based on the DateOfBirth value gathered from the InsureeController "Create" ActionResult
-            int age = DateTime.Now.Year - insuree.DateOfBirth.Year;
-            if (insuree.DateOfBirth.Month > DateTime.Now.Month
-            || insuree.DateOfBirth.Month == DateTime.Now.Month
-            && insuree.DateOfBirth.Day > DateTime.Now.Day)
-            {
-                age--;
-            }
-
-            int under18 = (age < 18) ? 100 : 0;
-            int btwn19and25 = ((age > 18) && (age < 26)) ? 50 : 0;
-            int over25 = (age > 25) ? 25 : 0;
-
-            autoQuote.AgeUnder18Rate = Convert.ToDecimal(under18);
-            autoQuote.AgeBtwn19and25Rate = Convert.ToDecimal(btwn19and25);
-            autoQuote.AgeOver25Rate = Convert.ToDecimal(over25);
-
-            //set Insurance Rate Calc Values that are based on the year of the vehicle
-            int autoYearBefore2000 = (insuree.AutoYear < 2000) ? 25 : 0;
-            int autoYearAfter2015 = (insuree.AutoYear > 2015) ? 25 : 0;
-            autoQuote.AutoYearBefore2000Rate = Convert.ToDecimal(autoYearBefore2000);
-            autoQuote.AutoYearAfter2015Rate = Convert.ToDecimal(autoYearAfter2015);
-            int autoYearBtwn2000and2015 = (insuree.AutoYear < 2000 && insuree.AutoYear > 2015) ? 0 : 0;
-            autoQuote.AutoYearBtwn2000and2015Rate = Convert.ToDecimal(autoYearBtwn2000and2015);
-
-            //set Insurance Rate Calc Values based on if the vehicle is a Porsche Carerra
-            var yesIsPorsche = (insuree.AutoMake == "Porsche") ? 25 : 0;
-            var yesIsCarrera = (insuree.AutoModel == "Carrera") ? 25 : 0;
-
-            autoQuote.IsPorscheRate = Convert.ToDecimal(yesIsPorsche);
-            autoQuote.IsCarreraRate = Convert.ToDecimal(yesIsCarrera);
-
-            //set Insurance Rate Calc for the number of speeding tickets the Insuree has on record
-            int tickets = insuree.SpeedingTickets;
-            int ticketRate = tickets * 10;
-            autoQuote.SpeedingTicketsRate = Convert.ToDecimal(ticketRate);
-
-            //set value of subtotal of calculated items prior to dui calculation because to calculate dui rate you take a percentage of the subtotal
-            var subtotalBeforeDUI = baseRate + under18 + btwn19and25 + over25 +
-                                  +autoYearBefore2000 + autoYearAfter2015 + yesIsPorsche +
-                                  yesIsCarrera + ticketRate;
-
-            autoQuote.SubtotalBeforeDuiCalc = Convert.ToDecimal(subtotalBeforeDUI);
-
-            //set dui rate based on if the insuree has had a dui 
-            decimal isTrue = 1.00M;
-            decimal isFalse = 0.00M;
-            decimal yesDUI = (insuree.DUI == true) ? isTrue : isFalse;
-            decimal twentyFivePercent = 0.25M;
-            decimal duiRate = (yesDUI == isTrue) ? decimal.Multiply(autoQuote.SubtotalBeforeDuiCalc, twentyFivePercent) : isFalse;
-
-            autoQuote.DuiRateUp25Percent = duiRate; // value that will be placed in Quote DuiRateUp25Percent
-
-            //set subtotal after the dui rate is accessed
-            autoQuote.SubtotalAfterDuiCalc = Decimal.Add(autoQuote.SubtotalBeforeDuiCalc, autoQuote.DuiRateUp25Percent);
-
-            //figure Insurance Rate Calc based on whether the Insuree needs full coverage insurance or not
-            decimal coverageType = (insuree.CoverageType == true) ? isTrue : isFalse;
-            decimal fiftyPercent = 0.50M;
-            autoQuote.CoverageTypeRateUp50Percent = (coverageType == isTrue) ? decimal.Multiply(autoQuote.SubtotalAfterDuiCalc, fiftyPercent) : isFalse;
-            autoQuote.SubtotalAfterCoverageCalc = Decimal.Add(autoQuote.SubtotalAfterDuiCalc, autoQuote.CoverageTypeRateUp50Percent);
-
-            //figure Insurance Rate per Month
-            autoQuote.MonthlyQuoteRate = autoQuote.SubtotalAfterCoverageCalc;
-
-            //figure Insurance Rate per Year
-            decimal months = 12.00M;
-            decimal yearlyQuoteRate = decimal.Multiply(autoQuote.MonthlyQuoteRate, months);
-            decimal save20Percent = decimal.Multiply(yearlyQuoteRate, (decimal).20);
-
-            autoQuote.YearlyQuoteRate = decimal.Subtract(autoQuote.YearlyQuoteRate, save20Percent);
-
-            TempData["AutoQuoteData"] = autoQuote;
+            //Send new instance of Insuree's data to be used to figure the calculations to be placed in the AutoQuote to 
+            TempData["InsureeId"] = insuree.InsureeId;
+            TempData["FirstName"] = insuree.FirstName;
+            TempData["LastName"] = insuree.LastName;
+            TempData["EmailAddress"] = insuree.EmailAddress;
+            TempData["DateOfBirth"] = insuree.DateOfBirth;
+            TempData["AutoYear"] = insuree.AutoYear;
+            TempData["AutoMake"] = insuree.AutoMake;
+            TempData["AutoModel"] = insuree.AutoModel;
+            TempData["SpeedingTickets"] = insuree.SpeedingTickets;
+            TempData["DUI"] = insuree.DUI;
+            TempData["CoverageType"] = insuree.CoverageType;
 
             return RedirectToAction("Create", "AutoQuotes");
-
-
         }
 
-        //Get Insuree Data
-        //Send new instance of Insuree's data to be used to figure the calculations to be placed in the AutoQuote to 
-        // GET: Insurees/Edit/5
+
+
+        // GET: Insurees/Edit/5 
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Insuree insuree = db.Insurees.Find(id);
+            var insuree = db.Insurees.Find(id);
             if (insuree == null)
             {
                 return HttpNotFound();
@@ -193,7 +124,7 @@ namespace AutoQuotesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Insuree insuree = db.Insurees.Find(id);
+            var insuree = db.Insurees.Find(id);
             if (insuree == null)
             {
                 return HttpNotFound();
@@ -206,7 +137,7 @@ namespace AutoQuotesWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Insuree insuree = db.Insurees.Find(id);
+            var insuree = db.Insurees.Find(id);
             db.Insurees.Remove(insuree);
             db.SaveChanges();
             return RedirectToAction("Index");

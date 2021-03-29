@@ -1,5 +1,5 @@
 ﻿@using AutoQuotesWebApp.ViewModels;
-@model IEnumerable<QuoteItemizationVM> 
+@model List<AutoQuotesWebApp.Models.InsureeVM>     
 @{
   Layout = null;
 }
@@ -82,7 +82,7 @@
 
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (InsureeFormVM item in Model)
         {
 
           <tr>

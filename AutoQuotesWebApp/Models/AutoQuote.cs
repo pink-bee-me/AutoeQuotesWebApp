@@ -13,10 +13,14 @@ namespace AutoQuotesWebApp.Models
 
     public partial class AutoQuote
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AutoQuote()
         {
-            this.AutoYearBtwn2000and2015Rate = 0.00m;
+
+        }
+
+        public AutoQuote(int id)
+        {
+            AutoQuoteId = id;
         }
 
         public int AutoQuoteId { get; set; }
@@ -41,6 +45,6 @@ namespace AutoQuotesWebApp.Models
         public decimal YearlyQuoteRate { get; set; }
 
         public virtual Insuree Insuree { get; set; }
-        public virtual IEnumerable<AutoQuote> AutoQuotes { get; set; }
+        public virtual ICollection<AutoQuote> AutoQuotes { get; set; }
     }
 }

@@ -160,7 +160,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_InsuranceQuoteDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AutoQuoteInsuree_AdminViewModel.cs" />
+    <Compile Include="ViewModels\AdminVM.cs" />
+    <Compile Include="ViewModels\InsureeVM.cs" />
     <Compile Include="ViewModels\QuoteItemizationVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -188,6 +189,7 @@
     <Content Include="Content\Images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\Images\widesmartRoad.jpg" />
     <Content Include="Content\Images\YellowLinesBlacktop.jpg" />
+    <Content Include="Content\styles_Create_AutoQuotesView.css" />
     <Content Include="Content\styles_Edit_InsureesView.css" />
     <Content Include="Content\styles_HomeAboutPage.css" />
     <Content Include="Content\styles_HomeIndexLandingPage.css" />
@@ -400,8 +402,8 @@
     <Content Include="Views\AutoQuotes\Index.cshtml" />
     <Content Include="Views\Insurees\Create.cshtml" />
     <Content Include="Views\Insurees\QuoteInsuree.cshtml" />
-    <Content Include="Views\AutoQuotes\Create.cshtml" />
     <Content Include="Views\AutoQuotes\QuoteItemization.cshtml" />
+    <Content Include="Views\AutoQuotes\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

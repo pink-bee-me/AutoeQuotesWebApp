@@ -3,19 +3,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AutoQuotesWebApp.ViewModels
 {
-    public class AutoQuoteInsuree_AdminViewModel
+    public class AdminVM
     {
         [Display(Name = "Insuree ID")]
-        public Insuree InsureeId { get; set; }
+        public InsureeVM InsureeId { get; set; }
 
         [Display(Name = "First Name")]
-        public Insuree FirstName { get; set; }
+        public InsureeVM FirstName { get; set; }
 
         [Display(Name = "Last Name")]
-        public Insuree LastName { get; set; }
+        public InsureeVM LastName { get; set; }
 
         [Display(Name = "Email Address")]
-        public Insuree EmailAddress { get; set; }
+        public InsureeVM EmailAddress { get; set; }
 
         [Display(Name = "AutoQuote Id")]
         public AutoQuote AutoquoteId { get; set; }
@@ -30,7 +30,7 @@ namespace AutoQuotesWebApp.ViewModels
         public AutoQuote YearlyQuoteRate { get; set; }
 
         [Display(Name = "Remove From Email List")]
-        public Insuree DoNotEmail { get; set; }
+        public InsureeVM DoNotEmail { get; set; }
 
 
     }

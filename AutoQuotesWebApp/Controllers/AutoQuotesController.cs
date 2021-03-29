@@ -1,5 +1,6 @@
 ﻿using AutoQuotesWebApp.Models;
 using AutoQuotesWebApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -33,68 +34,136 @@ namespace AutoQuotesWebApp.Controllers
             return View(autoQuote);
         }
 
-        //Get Info for Creation of AutoQuote
+
         public ActionResult Create()
         {
+            var insuree = new Insuree();
+
+            if (TempData.ContainsKey("InsureeId"))
+            {
+                insuree.InsureeId = Convert.ToInt32(TempData["InsureeId"]);
+            }
+            var id = insuree.InsureeId;
+            insuree = db.Insurees.Find(id);
             var autoQuote = new AutoQuote();
 
-            ////Insuree insureeForQuote = new Insuree(id);
-            //var insureeForQuote = new Insuree();
-            //List<Insuree> Insurees = new List<Insuree>();
-            //Insurees.Add(insureeForQuote);
+            autoQuote.QuoteGenerationDate = DateTime.Now;
 
-            //foreach (Insuree item in Insurees)
+            autoQuote.InsureeId = insuree.InsureeId;
+            //set AutoQuote InsureeId to match Insuree InsureeId
+            //database does that????
 
-            //{
-            //    if (TempData.ContainsKey("InsureeId"))
-            //    {
-            //        insureeForQuote.InsureeId = Convert.ToInt32(TempData["InsureeId"]);
-            //    }
+            //set BaseRate for AutoQuote
+            int baseRate = 50;
+            autoQuote.BaseRate = Convert.ToDecimal(baseRate);
 
-            //    if (TempData.ContainsKey("FirstName"))
-            //    {
-            //        insureeForQuote.FirstName = TempData["FirstName"].ToString();
-            //    }
-            //    if (TempData.ContainsKey("LastName"))
-            //    {
-            //        insureeForQuote.LastName = TempData["LastName"].ToString();
-            //    }
-            //    if (TempData.ContainsKey("EmailAddress"))
-            //    {
-            //        insureeForQuote.EmailAddress = TempData["EmailAddress"].ToString();
-            //    }
-            //    if (TempData.ContainsKey("DateOfBirth"))
-            //    {
-            //        insureeForQuote.DateOfBirth = Convert.ToDateTime(TempData["DateOfBirth"]);
-            //    }
-            //    if (TempData.ContainsKey("AutoYear"))
-            //    {
-            //        insureeForQuote.AutoYear = Convert.ToInt32(TempData["AutoYear"]);
-            //    }
-            //    if (TempData.ContainsKey("AutoMake"))
-            //    {
-            //        insureeForQuote.AutoMake = TempData["AutoMake"].ToString();
-            //    }
-            //    if (TempData.ContainsKey("AutoModel"))
-            //    {
-            //        insureeForQuote.AutoModel = TempData["AutoModel"].ToString();
-            //    }
-            //    if (TempData.ContainsKey("SpeedingTickets"))
-            //    {
-            //        insureeForQuote.SpeedingTickets = Convert.ToInt32(TempData["SpeedingTickets"]);
-            //    }
-            //    if (TempData.ContainsKey("DUI"))
-            //    {
-            //        insureeForQuote.DUI = Convert.ToBoolean(TempData["DUI"]);
-            //    }
-            //    if (TempData.ContainsKey("CoverageType"))
-            //    {
-            //        insureeForQuote.CoverageType = Convert.ToBoolean(TempData["CoverageType"]);
-            //    }
-            //}
-            //Now we will use the properties from the insuree model and build an autoQuote
+            //set AutoQuote Rate values that are based on the DateOfBirth value gathered from the InsureeController "Create" ActionResult
+            int age = DateTime.Now.Year - insuree.DateOfBirth.Year;
+            if (insuree.DateOfBirth.Month > DateTime.Now.Month
+            || insuree.DateOfBirth.Month == DateTime.Now.Month
+            && insuree.DateOfBirth.Day > DateTime.Now.Day)
+            {
+                age--;
+            }
 
-            return View(autoQuote);
+            int under18 = (age < 18) ? 100 : 0;
+            int btwn19and25 = ((age > 18) && (age < 26)) ? 50 : 0;
+            int over25 = (age > 25) ? 25 : 0;
+
+            autoQuote.AgeUnder18Rate = Convert.ToDecimal(under18);
+            autoQuote.AgeBtwn19and25Rate = Convert.ToDecimal(btwn19and25);
+            autoQuote.AgeOver25Rate = Convert.ToDecimal(over25);
+
+            //set Insurance Rate Calc Values that are based on the year of the vehicle
+            int autoYearBefore2000 = (insuree.AutoYear < 2000) ? 25 : 0;
+            int autoYearAfter2015 = (insuree.AutoYear > 2015) ? 25 : 0;
+            autoQuote.AutoYearBefore2000Rate = Convert.ToDecimal(autoYearBefore2000);
+            autoQuote.AutoYearAfter2015Rate = Convert.ToDecimal(autoYearAfter2015);
+            int autoYearBtwn2000and2015 = (insuree.AutoYear < 2000 && insuree.AutoYear > 2015) ? 0 : 0;
+            autoQuote.AutoYearBtwn2000and2015Rate = Convert.ToDecimal(autoYearBtwn2000and2015);
+
+            //set Insurance Rate Calc Values based on if the vehicle is a Porsche Carerra
+            var yesIsPorsche = (insuree.AutoMake == "Porsche") ? 25 : 0;
+            var yesIsCarrera = (insuree.AutoModel == "Carrera") ? 25 : 0;
+
+            autoQuote.IsPorscheRate = Convert.ToDecimal(yesIsPorsche);
+            autoQuote.IsCarreraRate = Convert.ToDecimal(yesIsCarrera);
+
+            //set Insurance Rate Calc for the number of speeding tickets the Insuree has on record
+            int tickets = insuree.SpeedingTickets;
+            int ticketRate = tickets * 10;
+            autoQuote.SpeedingTicketsRate = Convert.ToDecimal(ticketRate);
+
+            //set value of subtotal of calculated items prior to dui calculation because to calculate dui rate you take a percentage of the subtotal
+            var subtotalBeforeDUI = baseRate + under18 + btwn19and25 + over25 +
+                                  +autoYearBefore2000 + autoYearAfter2015 + yesIsPorsche +
+                                  yesIsCarrera + ticketRate;
+
+            autoQuote.SubtotalBeforeDuiCalc = Convert.ToDecimal(subtotalBeforeDUI);
+
+            //set dui rate based on if the insuree has had a dui 
+            decimal isTrue = 1.00M;
+            decimal isFalse = 0.00M;
+            decimal yesDUI = (insuree.DUI == true) ? isTrue : isFalse;
+            decimal twentyFivePercent = 0.25M;
+            decimal duiRate = (yesDUI == isTrue) ? decimal.Multiply(autoQuote.SubtotalBeforeDuiCalc, twentyFivePercent) : isFalse;
+
+            autoQuote.DuiRateUp25Percent = duiRate; // value that will be placed in Quote DuiRateUp25Percent
+
+            //set subtotal after the dui rate is accessed
+            autoQuote.SubtotalAfterDuiCalc = Decimal.Add(autoQuote.SubtotalBeforeDuiCalc, autoQuote.DuiRateUp25Percent);
+
+            //figure Insurance Rate Calc based on whether the Insuree needs full coverage insurance or not
+            decimal coverageType = (insuree.CoverageType == true) ? isTrue : isFalse;
+            decimal fiftyPercent = 0.50M;
+            autoQuote.CoverageTypeRateUp50Percent = (coverageType == isTrue) ? decimal.Multiply(autoQuote.SubtotalAfterDuiCalc, fiftyPercent) : isFalse;
+            autoQuote.SubtotalAfterCoverageCalc = Decimal.Add(autoQuote.SubtotalAfterDuiCalc, autoQuote.CoverageTypeRateUp50Percent);
+
+            //figure Insurance Rate per Month
+            autoQuote.MonthlyQuoteRate = autoQuote.SubtotalAfterCoverageCalc;
+
+            //figure Insurance Rate per Year
+            decimal months = 12.00M;
+            decimal yearlyQuoteRate = decimal.Multiply(autoQuote.MonthlyQuoteRate, months);
+            decimal save20Percent = decimal.Multiply(yearlyQuoteRate, (decimal).20);
+
+            autoQuote.YearlyQuoteRate = decimal.Subtract(autoQuote.YearlyQuoteRate, save20Percent);
+
+            List<QuoteItemizationVM> QuoteVMs = new List<QuoteItemizationVM>();
+            var quoteVM = new QuoteItemizationVM();
+            quoteVM.InsureeId = insuree.InsureeId;
+            quoteVM.FirstName = insuree.FirstName;
+            quoteVM.LastName = insuree.LastName;
+            quoteVM.EmailAddress = insuree.EmailAddress;
+            quoteVM.DateOfBirth = insuree.DateOfBirth;
+            quoteVM.AutoYear = insuree.AutoYear;
+            quoteVM.AutoMake = insuree.AutoMake;
+            quoteVM.AutoModel = insuree.AutoModel;
+            quoteVM.SpeedingTickets = insuree.SpeedingTickets;
+            quoteVM.DUI = insuree.DUI;
+            quoteVM.CoverageType = insuree.CoverageType;
+
+            quoteVM.QuoteGenerationDate = autoQuote.QuoteGenerationDate;
+            quoteVM.BaseRate = autoQuote.BaseRate;
+            quoteVM.AgeUnder18Rate = autoQuote.AgeUnder18Rate;
+            quoteVM.AgeBtwn19and25Rate = autoQuote.AgeBtwn19and25Rate;
+            quoteVM.AgeOver25Rate = autoQuote.AgeOver25Rate;
+            quoteVM.AutoYearBefore2000Rate = autoQuote.AutoYearBefore2000Rate;
+            quoteVM.AutoYearBtwn2000and2015Rate = autoQuote.AutoYearBtwn2000and2015Rate;
+            quoteVM.AutoYearAfter2015Rate = autoQuote.AutoYearAfter2015Rate;
+            quoteVM.IsPorscheRate = autoQuote.IsPorscheRate;
+            quoteVM.IsCarreraRate = autoQuote.IsCarreraRate;
+            quoteVM.SpeedingTicketsRate = autoQuote.SpeedingTicketsRate;
+            quoteVM.SubtotalBeforeDuiCalc = autoQuote.SubtotalBeforeDuiCalc;
+            quoteVM.DuiRateUp25Percent = autoQuote.DuiRateUp25Percent;
+            quoteVM.SubtotalAfterDuiCalc = autoQuote.SubtotalAfterDuiCalc;
+            quoteVM.CoverageTypeRateUp50Percent = autoQuote.CoverageTypeRateUp50Percent;
+            quoteVM.MonthlyQuoteRate = autoQuote.MonthlyQuoteRate;
+            quoteVM.YearlyQuoteRate = autoQuote.YearlyQuoteRate;
+
+            return View(quoteVM);
+
+
         }
 
 
@@ -109,80 +178,81 @@ namespace AutoQuotesWebApp.Controllers
                                    "MonthlyQuoteRate,YearlyQuoteRate")] AutoQuote autoQuote)
         {
 
-
             if (ModelState.IsValid)
             {
                 db.AutoQuotes.Add(autoQuote);
                 db.SaveChanges();
-                List<AutoQuote> AutoQuotes = new List<AutoQuote>();
-                AutoQuotes.Add(autoQuote);
             }
-
-            return RedirectToAction("QuoteItemization");
-        }
-
-
-        public ActionResult QuoteItemization(Insuree id)
-        {
-            List<Insuree> Insurees = new List<Insuree>();
-            Insuree insuree = new Insuree();
-            //var id = db.Insurees.Max(item => insuree.InsureeId);
-            insuree = db.Insurees.Find(id);
-
+            var id = autoQuote.AutoQuoteId;
             List<AutoQuote> AutoQuotes = new List<AutoQuote>();
-            AutoQuote autoQuote = new AutoQuote();
-            //var id = db.AutoQuotes.Max(item => autoQuote.AutoQuoteId);
             autoQuote = db.AutoQuotes.Find(id);
+            AutoQuotes.Add(autoQuote);
 
-            List<QuoteItemizationVM> VmModels = new List<QuoteItemizationVM>();
-            {
-                foreach (Insuree insureeForQuote in Insurees)
-                {
-                    var vmModel = new QuoteItemizationVM();
-
-                    vmModel.InsureeId = insureeForQuote.InsureeId;
-                    vmModel.FirstName = insureeForQuote.FirstName;
-                    vmModel.LastName = insureeForQuote.LastName;
-                    vmModel.EmailAddress = insureeForQuote.EmailAddress;
-                    vmModel.DateOfBirth = insureeForQuote.DateOfBirth;
-                    vmModel.AutoYear = insureeForQuote.AutoYear;
-                    vmModel.AutoMake = insureeForQuote.AutoMake;
-                    vmModel.AutoModel = insureeForQuote.AutoModel;
-                    vmModel.SpeedingTickets = insureeForQuote.SpeedingTickets;
-                    vmModel.DUI = insureeForQuote.DUI;
-                    vmModel.CoverageType = insureeForQuote.CoverageType;
-
-
-                    foreach (AutoQuote item in AutoQuotes)
-                    {
-
-                        vmModel.QuoteGenerationDate = autoQuote.QuoteGenerationDate;
-                        vmModel.BaseRate = autoQuote.BaseRate;
-                        vmModel.AgeUnder18Rate = autoQuote.AgeUnder18Rate;
-                        vmModel.AgeBtwn19and25Rate = autoQuote.AgeBtwn19and25Rate;
-                        vmModel.AgeOver25Rate = autoQuote.AgeOver25Rate;
-                        vmModel.AutoYearBefore2000Rate = autoQuote.AutoYearBefore2000Rate;
-                        vmModel.AutoYearBtwn2000and2015Rate = autoQuote.AutoYearBtwn2000and2015Rate;
-                        vmModel.AutoYearAfter2015Rate = autoQuote.AutoYearAfter2015Rate;
-                        vmModel.IsPorscheRate = autoQuote.IsPorscheRate;
-                        vmModel.IsCarreraRate = autoQuote.IsCarreraRate;
-                        vmModel.SpeedingTicketsRate = autoQuote.SpeedingTicketsRate;
-                        vmModel.SubtotalBeforeDuiCalc = autoQuote.SubtotalBeforeDuiCalc;
-                        vmModel.DuiRateUp25Percent = autoQuote.DuiRateUp25Percent;
-                        vmModel.SubtotalAfterDuiCalc = autoQuote.SubtotalAfterDuiCalc;
-                        vmModel.CoverageTypeRateUp50Percent = autoQuote.CoverageTypeRateUp50Percent;
-                        vmModel.SubtotalAfterCoverageCalc = autoQuote.SubtotalAfterCoverageCalc;
-                        vmModel.MonthlyQuoteRate = autoQuote.MonthlyQuoteRate;
-                        vmModel.YearlyQuoteRate = autoQuote.YearlyQuoteRate;
-
-
-
-                        VmModels.Add(vmModel);
-                    }
-                }
-            }
-            return View(VmModels);
+            return RedirectToAction("Index");
         }
+
+
+        //public ActionResult QuoteItemization(InsureeVM id)
+        //{
+        //    List<InsureeVM> Insurees = new List<InsureeVM>();
+        //    InsureeVM insuree = new InsureeVM();
+        //    //var id = db.Insurees.Max(item => insuree.InsureeId);
+        //    insuree = db.Insurees.Find(id);
+
+        //    List<AutoQuote> AutoQuotes = new List<AutoQuote>();
+        //    AutoQuote autoQuote = new AutoQuote();
+        //    //var id = db.AutoQuotes.Max(item => autoQuote.AutoQuoteId);
+        //    autoQuote = db.AutoQuotes.Find(id);
+
+        //    List<QuoteItemizationVM> VmModels = new List<QuoteItemizationVM>();
+        //    {
+        //        foreach (InsureeVM insureeForQuote in Insurees)
+        //        {
+        //            var vmModel = new QuoteItemizationVM();
+
+        //            vmModel.InsureeId = insureeForQuote.InsureeId;
+        //            vmModel.FirstName = insureeForQuote.FirstName;
+        //            vmModel.LastName = insureeForQuote.LastName;
+        //            vmModel.EmailAddress = insureeForQuote.EmailAddress;
+        //            vmModel.DateOfBirth = insureeForQuote.DateOfBirth;
+        //            vmModel.AutoYear = insureeForQuote.AutoYear;
+        //            vmModel.AutoMake = insureeForQuote.AutoMake;
+        //            vmModel.AutoModel = insureeForQuote.AutoModel;
+        //            vmModel.SpeedingTickets = insureeForQuote.SpeedingTickets;
+        //            vmModel.DUI = insureeForQuote.DUI;
+        //            vmModel.CoverageType = insureeForQuote.CoverageType;
+
+
+        //            foreach (AutoQuote item in AutoQuotes)
+        //            {
+
+        //                vmModel.QuoteGenerationDate = autoQuote.QuoteGenerationDate;
+        //                vmModel.BaseRate = autoQuote.BaseRate;
+        //                vmModel.AgeUnder18Rate = autoQuote.AgeUnder18Rate;
+        //                vmModel.AgeBtwn19and25Rate = autoQuote.AgeBtwn19and25Rate;
+        //                vmModel.AgeOver25Rate = autoQuote.AgeOver25Rate;
+        //                vmModel.AutoYearBefore2000Rate = autoQuote.AutoYearBefore2000Rate;
+        //                vmModel.AutoYearBtwn2000and2015Rate = autoQuote.AutoYearBtwn2000and2015Rate;
+        //                vmModel.AutoYearAfter2015Rate = autoQuote.AutoYearAfter2015Rate;
+        //                vmModel.IsPorscheRate = autoQuote.IsPorscheRate;
+        //                vmModel.IsCarreraRate = autoQuote.IsCarreraRate;
+        //                vmModel.SpeedingTicketsRate = autoQuote.SpeedingTicketsRate;
+        //                vmModel.SubtotalBeforeDuiCalc = autoQuote.SubtotalBeforeDuiCalc;
+        //                vmModel.DuiRateUp25Percent = autoQuote.DuiRateUp25Percent;
+        //                vmModel.SubtotalAfterDuiCalc = autoQuote.SubtotalAfterDuiCalc;
+        //                vmModel.CoverageTypeRateUp50Percent = autoQuote.CoverageTypeRateUp50Percent;
+        //                vmModel.SubtotalAfterCoverageCalc = autoQuote.SubtotalAfterCoverageCalc;
+        //                vmModel.MonthlyQuoteRate = autoQuote.MonthlyQuoteRate;
+        //                vmModel.YearlyQuoteRate = autoQuote.YearlyQuoteRate;
+
+
+
+        //                VmModels.Add(vmModel);
+        //            }
+        //        }
+        //    }
+        //    return View(VmModels);
+        //}
 
         //if (TempData.ContainsKey("InsureeId"))
         //{
