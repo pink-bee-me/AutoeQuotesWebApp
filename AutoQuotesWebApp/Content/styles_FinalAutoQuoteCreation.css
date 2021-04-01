@@ -1,0 +1,249 @@
+﻿html {
+    width: 100vw;
+    height: 100vh;
+    background: black;
+}
+
+body {
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    margin: 0,0,0,0;
+    padding: 0;
+    /* width: 100%;
+    height: 100%;*/
+    background-image: url("Images/"
+    background-size: cover;
+}
+
+/* #BackgroundImage{
+        position:relative;
+        top:-1vh;
+        left:0vw;
+        width:100vw;
+        height:auto;
+        background-image:url("Images/YellowLinesBlacktop.jpg");
+        background-size:cover;*/
+
+#ColorOverlay {
+    position: relative;
+    top: -1vh;
+    left: 0vw;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.40);
+}
+
+#TextContainer {
+    position: relative;
+    top: -3vh;
+    left: 5vw;
+    width: 80vw;
+    height: 95vh;
+    color: white;
+}
+
+.hiddenGroup {
+    width: 0vw;
+    height: 0vh;
+}
+
+
+input {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.labelStyle {
+    font-size: 1.15em;
+}
+
+.insureeDataField > input[type = "text"] {
+    position: relative;
+    top: 1vh;
+    left: 2vw;
+    transform: scale(1.5);
+}
+
+.insureeDataField > input[type = "number"] {
+    position: relative;
+    top: 1vh;
+    left: 2vw;
+    transform: scale(1.5);
+}
+
+.insureeDataField > input[type = "date"] {
+    position: relative;
+    top: 1vh;
+    left: 2vw;
+    transform: scale(1.5);
+}
+
+.insureeDataField > input[type = "checkbox"] {
+    appearance: checkbox;
+    position: relative;
+    top: 1vh;
+    left: 0vw;
+    transform: scale(2);
+}
+
+
+
+#IdHiddenField {
+    width: 0vw;
+    height: 0vh;
+}
+
+#HiddenInsureeIdField.form-group {
+    width: 0;
+    height: 0;
+}
+
+#TitleBlock {
+    position: relative;
+    top: 7vh;
+    left: 3vw;
+}
+
+#EnterInfo {
+    font-size: 2.0em
+}
+
+#MonthlyRateHiddenField {
+    width: 0vw;
+    height: 0;
+}
+
+#YearlyRateHiddenField {
+    width: 0vw;
+    height: 0vh;
+}
+
+.insureeDataField {
+    font-size: 1.25em;
+}
+
+
+.form-group {
+    width: 50vw;
+    height: 7vh;
+    margin: 5px 5px,0px,5px;
+    padding: 5px;
+    font-size: 1.25em;
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 600;
+}
+
+
+#FormSubmitButton {
+    position: relative;
+    bottom: 75vh;
+    right: -40vw;
+    padding: 0;
+}
+
+
+
+#CreateButton {
+    position: relative;
+    top: 7vh;
+    left: 1vw;
+    width: 9vw;
+    height: 5vh;
+    justify-content: center;
+    border: 5px solid white;
+    color: white;
+    font-weight: 600;
+    background-color: orchid;
+    font-size: 1.5em;
+    margin: 3px 3px 3px 3px;
+}
+
+#YourQuote {
+    position: relative;
+    top: -2vh;
+    left: 11vw;
+    padding: 2px;
+    font-size: 1.5em;
+}
+
+#FormConnectionLinks {
+    position: relative;
+    bottom: 60vh;
+    right: -41vw;
+    width: 35vw;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+a {
+    position: relative;
+    bottom: 0vh;
+    right: 0vw;
+    background: white;
+    font-size: 1em;
+    padding: 10px;
+    color: orangered;
+}
+
+.field-validation-error {
+    color: #f7e72c;
+    font-size: 1.25em
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #FF0000;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+#InsureeCreatePageBodyContainer {
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    font-family: "Josefin Sans", sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+#InsureeCreateBackground img {
+    position: relative;
+    top: 0;
+    left: 0vw;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+
+#Color_Overlay {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    background-size: cover;
+    background: rgba(255,255,255,.35);
+    width: 100vw;
+    height: 150vh;
+}
+
+.jumbotron {
+    position: relative;
+    bottom: 100vh;
+    right: 3vw;
+    background: none;
+    font-size: 1.5em;
+    color: white;
+}

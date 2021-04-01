@@ -68,18 +68,7 @@ namespace AutoQuotesWebApp.Controllers
             Insurees.Add(insuree);
 
             //Send new instance of Insuree's data to be used to figure the calculations to be placed in the AutoQuote to 
-            TempData["InsureeId"] = insuree.InsureeId;
-            TempData["FirstName"] = insuree.FirstName;
-            TempData["LastName"] = insuree.LastName;
-            TempData["EmailAddress"] = insuree.EmailAddress;
-            TempData["DateOfBirth"] = insuree.DateOfBirth;
-            TempData["AutoYear"] = insuree.AutoYear;
-            TempData["AutoMake"] = insuree.AutoMake;
-            TempData["AutoModel"] = insuree.AutoModel;
-            TempData["SpeedingTickets"] = insuree.SpeedingTickets;
-            TempData["DUI"] = insuree.DUI;
-            TempData["CoverageType"] = insuree.CoverageType;
-
+            TempData["InsureeId"] = id;
             return RedirectToAction("Create", "AutoQuotes");
         }
 

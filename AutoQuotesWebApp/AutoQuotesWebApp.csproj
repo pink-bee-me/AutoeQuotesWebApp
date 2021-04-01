@@ -179,6 +179,13 @@
     <Content Include="Content\Images\LandingPageCut.png" />
     <Content Include="Content\Images\LandingPageYelloStripes.jpg" />
     <Content Include="Content\Images\MonopolyCar.jpg" />
+    <Content Include="Content\Images\pexels-arthouse-studio-4320781.jpg" />
+    <Content Include="Content\Images\pexels-joshua-welch-1624600.jpg" />
+    <Content Include="Content\Images\pexels-pixabay-52531.jpg" />
+    <Content Include="Content\Images\pexels-ricardo-esquivel-3041347.jpg" />
+    <Content Include="Content\Images\pexels-sebastian-palomino-1955134.jpg" />
+    <Content Include="Content\Images\pexels-simon-migaj-2272357.jpg" />
+    <Content Include="Content\Images\pexels-trace-hudson-2770933.jpg" />
     <Content Include="Content\Images\SeasideDrive.jpg" />
     <Content Include="Content\Images\SmartRoadWide.jpg" />
     <Content Include="Content\Images\ui-icons_444444_256x240.png" />
@@ -191,6 +198,7 @@
     <Content Include="Content\Images\YellowLinesBlacktop.jpg" />
     <Content Include="Content\styles_Create_AutoQuotesView.css" />
     <Content Include="Content\styles_Edit_InsureesView.css" />
+    <Content Include="Content\styles_FinalAutoQuoteCreation.css" />
     <Content Include="Content\styles_HomeAboutPage.css" />
     <Content Include="Content\styles_HomeIndexLandingPage.css" />
     <Content Include="Content\styles_InsureeForm.css" />
@@ -395,7 +403,6 @@
     <Content Include="Views\Insurees\Delete.cshtml" />
     <Content Include="Views\Insurees\Edit.cshtml" />
     <Content Include="Views\Insurees\Index.cshtml" />
-    <Content Include="Views\Insurees\CalculateAutoquote.cshtml" />
     <Content Include="Views\AutoQuotes\Delete.cshtml" />
     <Content Include="Views\AutoQuotes\Details.cshtml" />
     <Content Include="Views\AutoQuotes\Edit.cshtml" />
@@ -404,6 +411,7 @@
     <Content Include="Views\Insurees\QuoteInsuree.cshtml" />
     <Content Include="Views\AutoQuotes\QuoteItemization.cshtml" />
     <Content Include="Views\AutoQuotes\Create.cshtml" />
+    <Content Include="Views\AutoQuotes\FinalAutoQuoteCreation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

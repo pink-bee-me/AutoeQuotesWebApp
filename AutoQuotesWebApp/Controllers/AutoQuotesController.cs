@@ -34,7 +34,10 @@ namespace AutoQuotesWebApp.Controllers
             return View(autoQuote);
         }
 
-
+        //We are "Getting" the info necessary to compute the autoQuote from the infor that was gathered 
+        //from the user in the InsureesController.
+        //Technically this is not ypour standard get action, but while it is not a true HTTP Get Request
+        //....it does "get The info to the conttroller -- so that we can create a quote for the user.
         public ActionResult Create()
         {
             var insuree = new Insuree();
@@ -42,9 +45,10 @@ namespace AutoQuotesWebApp.Controllers
             if (TempData.ContainsKey("InsureeId"))
             {
                 insuree.InsureeId = Convert.ToInt32(TempData["InsureeId"]);
+
             }
-            var id = insuree.InsureeId;
-            insuree = db.Insurees.Find(id);
+
+            insuree = db.Insurees.Find(insuree.InsureeId);
             var autoQuote = new AutoQuote();
 
             autoQuote.QuoteGenerationDate = DateTime.Now;
@@ -175,20 +179,22 @@ namespace AutoQuotesWebApp.Controllers
                                    "AutoYearBtwn2000and2015Rate,AutoYearAfter2015Rate,IsPorscheRate," +
                                    "IsCarreraRate,SpeedingTicketsRate,SubtotalBeforeDuiCalc,DuiRateUp25Percent," +
                                    "SubtotalAfterDuiCalc,CoverageTypeRateUp50Percent,SubtotalAfterCoverageCalc," +
-                                   "MonthlyQuoteRate,YearlyQuoteRate")] AutoQuote autoQuote)
+                                   "MonthlyQuoteRate,YearlyQuoteRate")] QuoteItemizationVM quoteVM)
         {
+
 
             if (ModelState.IsValid)
             {
+                var autoQuote = new AutoQuote(quoteVM);
                 db.AutoQuotes.Add(autoQuote);
                 db.SaveChanges();
-            }
-            var id = autoQuote.AutoQuoteId;
-            List<AutoQuote> AutoQuotes = new List<AutoQuote>();
-            autoQuote = db.AutoQuotes.Find(id);
-            AutoQuotes.Add(autoQuote);
 
-            return RedirectToAction("Index");
+                var id = autoQuote.AutoQuoteId;
+                List<AutoQuote> AutoQuotes = new List<AutoQuote>();
+                autoQuote = db.AutoQuotes.Find(id);
+                AutoQuotes.Add(autoQuote);
+            }
+            return View("");
         }
 
 
