@@ -9,7 +9,9 @@
 namespace AutoQuotesWebApp.Models
 {
     using AutoQuotesWebApp.ViewModels;
+    using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class AutoQuote
     {
@@ -45,7 +47,8 @@ namespace AutoQuotesWebApp.Models
         }
 
         public int AutoQuoteId { get; set; }
-        public System.DateTime QuoteGenerationDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime QuoteGenerationDate { get; set; }
         public int InsureeId { get; set; }
         public decimal BaseRate { get; set; }
         public decimal AgeUnder18Rate { get; set; }

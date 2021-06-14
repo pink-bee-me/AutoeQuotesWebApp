@@ -106,64 +106,71 @@ namespace AutoQuotesWebApp.Controllers
             autoQuote.SubtotalBeforeDuiCalc = Convert.ToDecimal(subtotalBeforeDUI);
 
             //set dui rate based on if the insuree has had a dui 
-            decimal isTrue = 1.00M;
-            decimal isFalse = 0.00M;
-            decimal yesDUI = (insuree.DUI == true) ? isTrue : isFalse;
-            decimal twentyFivePercent = 0.25M;
-            decimal duiRate = (yesDUI == isTrue) ? decimal.Multiply(autoQuote.SubtotalBeforeDuiCalc, twentyFivePercent) : isFalse;
+            if (insuree.DUI == true)
+            {
+               autoQuote.DuiRateUp25Percent = decimal.Multiply(autoQuote.SubtotalBeforeDuiCalc, 0.25M);
+            }
+         
+         else
+            {
+                autoQuote.DuiRateUp25Percent = decimal.Multiply(autoQuote.SubtotalBeforeDuiCalc, 1.00M);
+            }
 
-            autoQuote.DuiRateUp25Percent = duiRate; // value that will be placed in Quote DuiRateUp25Percent
 
             //set subtotal after the dui rate is accessed
-            autoQuote.SubtotalAfterDuiCalc = Decimal.Add(autoQuote.SubtotalBeforeDuiCalc, autoQuote.DuiRateUp25Percent);
+            autoQuote.SubtotalAfterDuiCalc = decimal.Add(autoQuote.SubtotalBeforeDuiCalc, autoQuote.DuiRateUp25Percent);
 
             //figure Insurance Rate Calc based on whether the Insuree needs full coverage insurance or not
-            decimal coverageType = (insuree.CoverageType == true) ? isTrue : isFalse;
-            decimal fiftyPercent = 0.50M;
-            autoQuote.CoverageTypeRateUp50Percent = (coverageType == isTrue) ? decimal.Multiply(autoQuote.SubtotalAfterDuiCalc, fiftyPercent) : isFalse;
-            autoQuote.SubtotalAfterCoverageCalc = Decimal.Add(autoQuote.SubtotalAfterDuiCalc, autoQuote.CoverageTypeRateUp50Percent);
+           
+           if (insuree.CoverageType == true)
+            {
+                autoQuote.CoverageTypeRateUp50Percent = decimal.Multiply(autoQuote.SubtotalAfterDuiCalc, 0.50M);
+            }
+            else
+            {
+                autoQuote.CoverageTypeRateUp50Percent = decimal.Multiply(autoQuote.SubtotalAfterDuiCalc, 1.00M);
+            } 
+
+            autoQuote.SubtotalAfterCoverageCalc = decimal.Add(autoQuote.SubtotalAfterDuiCalc, autoQuote.CoverageTypeRateUp50Percent);
 
             //figure Insurance Rate per Month
             autoQuote.MonthlyQuoteRate = autoQuote.SubtotalAfterCoverageCalc;
 
             //figure Insurance Rate per Year
             decimal months = 12.00M;
-            decimal yearlyQuoteRate = decimal.Multiply(autoQuote.MonthlyQuoteRate, months);
-            decimal save20Percent = decimal.Multiply(yearlyQuoteRate, (decimal).20);
-
-            autoQuote.YearlyQuoteRate = decimal.Subtract(autoQuote.YearlyQuoteRate, save20Percent);
-
+            autoQuote.YearlyQuoteRate = decimal.Multiply(autoQuote.MonthlyQuoteRate, months);
+           
             List<QuoteItemizationVM> QuoteVMs = new List<QuoteItemizationVM>();
-            var quoteVM = new QuoteItemizationVM();
-            quoteVM.InsureeId = insuree.InsureeId;
-            quoteVM.FirstName = insuree.FirstName;
-            quoteVM.LastName = insuree.LastName;
-            quoteVM.EmailAddress = insuree.EmailAddress;
-            quoteVM.DateOfBirth = insuree.DateOfBirth;
-            quoteVM.AutoYear = insuree.AutoYear;
-            quoteVM.AutoMake = insuree.AutoMake;
-            quoteVM.AutoModel = insuree.AutoModel;
-            quoteVM.SpeedingTickets = insuree.SpeedingTickets;
-            quoteVM.DUI = insuree.DUI;
-            quoteVM.CoverageType = insuree.CoverageType;
+            var quoteVM = new QuoteItemizationVM(insuree, autoQuote);
+            //quoteVM.InsureeId = insuree.InsureeId;
+            //quoteVM.FirstName = insuree.FirstName;
+            //quoteVM.LastName = insuree.LastName;
+            //quoteVM.EmailAddress = insuree.EmailAddress;
+            //quoteVM.DateOfBirth = insuree.DateOfBirth;
+            //quoteVM.AutoYear = insuree.AutoYear;
+            //quoteVM.AutoMake = insuree.AutoMake;
+            //quoteVM.AutoModel = insuree.AutoModel;
+            //quoteVM.SpeedingTickets = insuree.SpeedingTickets;
+            //quoteVM.DUI = insuree.DUI;
+            //quoteVM.CoverageType = insuree.CoverageType;
 
-            quoteVM.QuoteGenerationDate = autoQuote.QuoteGenerationDate;
-            quoteVM.BaseRate = autoQuote.BaseRate;
-            quoteVM.AgeUnder18Rate = autoQuote.AgeUnder18Rate;
-            quoteVM.AgeBtwn19and25Rate = autoQuote.AgeBtwn19and25Rate;
-            quoteVM.AgeOver25Rate = autoQuote.AgeOver25Rate;
-            quoteVM.AutoYearBefore2000Rate = autoQuote.AutoYearBefore2000Rate;
-            quoteVM.AutoYearBtwn2000and2015Rate = autoQuote.AutoYearBtwn2000and2015Rate;
-            quoteVM.AutoYearAfter2015Rate = autoQuote.AutoYearAfter2015Rate;
-            quoteVM.IsPorscheRate = autoQuote.IsPorscheRate;
-            quoteVM.IsCarreraRate = autoQuote.IsCarreraRate;
-            quoteVM.SpeedingTicketsRate = autoQuote.SpeedingTicketsRate;
-            quoteVM.SubtotalBeforeDuiCalc = autoQuote.SubtotalBeforeDuiCalc;
-            quoteVM.DuiRateUp25Percent = autoQuote.DuiRateUp25Percent;
-            quoteVM.SubtotalAfterDuiCalc = autoQuote.SubtotalAfterDuiCalc;
-            quoteVM.CoverageTypeRateUp50Percent = autoQuote.CoverageTypeRateUp50Percent;
-            quoteVM.MonthlyQuoteRate = autoQuote.MonthlyQuoteRate;
-            quoteVM.YearlyQuoteRate = autoQuote.YearlyQuoteRate;
+            //quoteVM.QuoteGenerationDate = autoQuote.QuoteGenerationDate;
+            //quoteVM.BaseRate = autoQuote.BaseRate;
+            //quoteVM.AgeUnder18Rate = autoQuote.AgeUnder18Rate;
+            //quoteVM.AgeBtwn19and25Rate = autoQuote.AgeBtwn19and25Rate;
+            //quoteVM.AgeOver25Rate = autoQuote.AgeOver25Rate;
+            //quoteVM.AutoYearBefore2000Rate = autoQuote.AutoYearBefore2000Rate;
+            //quoteVM.AutoYearBtwn2000and2015Rate = autoQuote.AutoYearBtwn2000and2015Rate;
+            //quoteVM.AutoYearAfter2015Rate = autoQuote.AutoYearAfter2015Rate;
+            //quoteVM.IsPorscheRate = autoQuote.IsPorscheRate;
+            //quoteVM.IsCarreraRate = autoQuote.IsCarreraRate;
+            //quoteVM.SpeedingTicketsRate = autoQuote.SpeedingTicketsRate;
+            //quoteVM.SubtotalBeforeDuiCalc = autoQuote.SubtotalBeforeDuiCalc;
+            //quoteVM.DuiRateUp25Percent = autoQuote.DuiRateUp25Percent;
+            //quoteVM.SubtotalAfterDuiCalc = autoQuote.SubtotalAfterDuiCalc;
+            //quoteVM.CoverageTypeRateUp50Percent = autoQuote.CoverageTypeRateUp50Percent;
+            //quoteVM.MonthlyQuoteRate = autoQuote.MonthlyQuoteRate;
+            //quoteVM.YearlyQuoteRate = autoQuote.YearlyQuoteRate;
 
             return View(quoteVM);
 
@@ -194,7 +201,7 @@ namespace AutoQuotesWebApp.Controllers
                 autoQuote = db.AutoQuotes.Find(id);
                 AutoQuotes.Add(autoQuote);
             }
-            return View("");
+            return View("FinalAutoQuoteCreation");
         }
 
 

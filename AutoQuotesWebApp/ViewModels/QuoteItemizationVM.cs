@@ -1,4 +1,5 @@
 ﻿using AutoQuotesWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,8 +17,7 @@ namespace AutoQuotesWebApp.ViewModels
         [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
         [Display(Name = "Date Of Birth")]
-        [DataType(DataType.Date)]
-        public System.DateTime DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         [Display(Name = "Auto Year")]
         public int AutoYear { get; set; }
         [Display(Name = "Auto Make")]
@@ -37,7 +37,8 @@ namespace AutoQuotesWebApp.ViewModels
         [Display(Name = "AutoQuote ID")]
         public int AutoQuoteId { get; set; }
         [Display(Name = "Quote Date")]
-        public System.DateTime QuoteGenerationDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime QuoteGenerationDate { get; set; }
         [Display(Name = "Base Rate")]
         public decimal BaseRate { get; set; }
         [Display(Name = "Age Under 18 Rate")]
@@ -72,6 +73,40 @@ namespace AutoQuotesWebApp.ViewModels
         public decimal MonthlyQuoteRate { get; set; }
         [Display(Name = "Yearly Payment Option (Pay Today and Save 20% !!!) :")]
         public decimal YearlyQuoteRate { get; set; }
+
+        public QuoteItemizationVM(Insuree insuree, AutoQuote autoQuote)
+        {
+            InsureeId = insuree.InsureeId;
+            FirstName = insuree.FirstName;
+            LastName = insuree.LastName;
+            EmailAddress = insuree.EmailAddress;
+            DateOfBirth = insuree.DateOfBirth;
+            AutoYear = insuree.AutoYear;
+            AutoMake = insuree.AutoMake;
+            AutoModel = insuree.AutoModel;
+            SpeedingTickets = insuree.SpeedingTickets;
+            DUI = insuree.DUI;
+            CoverageType = insuree.CoverageType;
+            AutoQuoteId = autoQuote.AutoQuoteId;
+            QuoteGenerationDate = autoQuote.QuoteGenerationDate;
+            BaseRate = autoQuote.BaseRate;
+            AgeUnder18Rate = autoQuote.AgeUnder18Rate;
+            AgeBtwn19and25Rate = autoQuote.AgeBtwn19and25Rate;
+            AgeOver25Rate = autoQuote.AgeOver25Rate;
+            AutoYearBefore2000Rate = autoQuote.AutoYearBefore2000Rate;
+            AutoYearBtwn2000and2015Rate = autoQuote.AutoYearBtwn2000and2015Rate;
+            AutoYearAfter2015Rate = autoQuote.AutoYearAfter2015Rate;
+            IsPorscheRate = autoQuote.IsPorscheRate;
+            IsCarreraRate = autoQuote.IsCarreraRate;
+            SpeedingTicketsRate = autoQuote.SpeedingTicketsRate;
+            SubtotalBeforeDuiCalc = autoQuote.SubtotalBeforeDuiCalc;
+            DuiRateUp25Percent = autoQuote.DuiRateUp25Percent;
+            SubtotalAfterDuiCalc = autoQuote.SubtotalAfterDuiCalc;
+            CoverageTypeRateUp50Percent = autoQuote.CoverageTypeRateUp50Percent;
+            SubtotalAfterCoverageCalc = autoQuote.SubtotalAfterCoverageCalc;
+            MonthlyQuoteRate = autoQuote.MonthlyQuoteRate;
+            YearlyQuoteRate = autoQuote.YearlyQuoteRate;
+        }
 
         public List<InsureeVM> Insurees { get; set; }
         public List<AutoQuote> AutoQuotes { get; set; }

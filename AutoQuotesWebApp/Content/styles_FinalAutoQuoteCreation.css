@@ -12,18 +12,9 @@ body {
     padding: 0;
     /* width: 100%;
     height: 100%;*/
-    background-image: url("Images/"
+    background-image: url("Images/RoadWithClouds.jpg");
     background-size: cover;
 }
-
-/* #BackgroundImage{
-        position:relative;
-        top:-1vh;
-        left:0vw;
-        width:100vw;
-        height:auto;
-        background-image:url("Images/YellowLinesBlacktop.jpg");
-        background-size:cover;*/
 
 #ColorOverlay {
     position: relative;

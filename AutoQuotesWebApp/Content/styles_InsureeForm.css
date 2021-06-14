@@ -7,19 +7,18 @@
 html {
     width: 100vw;
     height: 100vh;
-    background: black;
+
 }
 
 body {
-    position: absolute;
-    top: 0vh;
-    left: 0vw;
-    margin: 0,0,0,0;
+    position: fixed;
+    top: -2vh;
+    left: -2vw;
     padding: 0;
-    /* width: 100%;
-    height: 100%;*/
+     width: 100%;
+    height: 100%;
     background-image: url("Images/YellowLinesBlacktop.jpg");
-    background-size: cover;
+  background-size:cover;
 }
 
 /* #BackgroundImage{
@@ -33,11 +32,12 @@ body {
 
 #ColorOverlay {
     position: relative;
-    top: -1vh;
-    left: 0vw;
-    width: 100vw;
-    height: 100vh;
+    top: 0vh;
+    left: 1vw;
+    width: 100%;
+    height: 100%;
     background-color: rgba(128, 128, 128, 0.40);
+    background-size:cover;
 }
 
 #TextContainer {
@@ -56,37 +56,39 @@ body {
 
 
 input {
-    appearance: none;
+   /* appearance: none;*/
     -webkit-appearance: none;
 }
 
 .labelStyle {
-    font-size: 1.15em;
+    font-size: 1.0em;
 }
 
 .insureeDataField > input[type = "text"] {
     position: relative;
     top: 1vh;
-    left: 2vw;
+    left: 3vw;
     transform: scale(1.5);
 }
 
 .insureeDataField > input[type = "number"] {
     position: relative;
     top: 1vh;
-    left: 2vw;
+    left: 3vw;
     transform: scale(1.5);
 }
 
 .insureeDataField > input[type = "date"] {
     position: relative;
     top: 1vh;
-    left: 2vw;
+    left: 3vw;
     transform: scale(1.5);
 }
 
-.insureeDataField > input[type = "checkbox"] {
-    appearance: checkbox;
+.insureeDataField > input[type = "radio"] {
+    -webkit-appearance: radio;
+    -moz-appearance:radio;
+    appearance:radio;
     position: relative;
     top: 1vh;
     left: 0vw;
@@ -112,7 +114,7 @@ input {
 }
 
 #EnterInfo {
-    font-size: 2.0em
+    font-size: 1.25em
 }
 
 #MonthlyRateHiddenField {
@@ -126,7 +128,7 @@ input {
 }
 
 .insureeDataField {
-    font-size: 1.25em;
+    font-size: 1em;
 }
 
 
@@ -135,7 +137,7 @@ input {
     height: 7vh;
     margin: 5px 5px,0px,5px;
     padding: 5px;
-    font-size: 1.25em;
+    font-size: 1em;
     font-family: "Nunito Sans", sans-serif;
     font-weight: 600;
 }
@@ -155,7 +157,7 @@ input {
     top: 7vh;
     left: 1vw;
     width: 9vw;
-    height: 5vh;
+    height: 7vh;
     justify-content: center;
     border: 5px solid white;
     color: white;
@@ -167,7 +169,7 @@ input {
 
 #YourQuote {
     position:relative;
-    top:-2vh;
+    top:-5vh;
     left:11vw;
     padding: 2px;
     font-size: 1.5em;
@@ -179,7 +181,7 @@ input {
     right: -41vw;
     width: 35vw;
     color: white;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 600;
 }
 
@@ -216,16 +218,16 @@ a {
     display: none;
 }
 
-#InsureeCreatePageBodyContainer {
+/*#InsureeCreatePageBodyContainer {
     position: absolute;
     top: 0vh;
     left: 0vw;
     font-family: "Josefin Sans", sans-serif;
     width: 100vw;
     height: 100vh;
-}
+}*/
 
-#InsureeCreateBackground img {
+/*#InsureeCreateBackground img {
     position: relative;
     top: 0;
     left: 0vw;
@@ -233,9 +235,9 @@ a {
     height: 100vh;
     z-index: -1;
 }
+*/
 
-
-#Color_Overlay {
+/*#Color_Overlay {
     position: relative;
     bottom: 0;
     right: 0;
@@ -243,13 +245,6 @@ a {
     background: rgba(255,255,255,.35);
     width: 100vw;
     height: 150vh;
-}
+}*/
 
-.jumbotron {
-    position: relative;
-    bottom: 100vh;
-    right: 3vw;
-    background: none;
-    font-size: 1.5em;
-    color: white;
-}
+

@@ -104,9 +104,10 @@
             </div>
 
             <div class="form-group">
-              @Html.LabelFor(model => model.DUI, htmlAttributes: new { @class = "control-label col-md-2" })
+              @Html.RadioButtonFor(model => model.DUI,true, htmlAttributes: new { @class = "control-label col-md-2" })
+        
               <div class="col-md-10">
-                <div class="checkbox">
+                <div class="radio">
                   @Html.EditorFor(model => model.DUI)
                   @Html.ValidationMessageFor(model => model.DUI, "", new { @class = "text-danger" })
                 </div>
@@ -114,7 +115,7 @@
             </div>
 
             <div class="form-group">
-              @Html.LabelFor(model => model.CoverageType, htmlAttributes: new { @class = "control-label col-md-2" })
+              @Html.RadioButtonFor(model => model.CoverageType, true, htmlAttributes: new { @class = "control-label col-md-2" })
               <div class="col-md-10">
                 <div class="checkbox">
                   @Html.EditorFor(model => model.CoverageType)

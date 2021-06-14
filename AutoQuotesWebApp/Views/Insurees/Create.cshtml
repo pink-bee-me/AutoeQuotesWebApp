@@ -16,120 +16,138 @@
 <body>
   @Scripts.Render("~/bundles/jqueryval")
 
-  <div id="BackgroundImage">
-
-    <div id="ColorOverlay">
-      <div id="TextContainer">
-
+  
+        
         @using (Html.BeginForm("Create", "Insurees", FormMethod.Post))
-
         {
+
          @Html.AntiForgeryToken()
+         <div id="BackgroundImage">
 
-          <div id="TitleBlock" class="form-horizontal">
+         <div id="ColorOverlay">
+         <div id="TextContainer">
 
-            <h2 id="EnterInfo">Insuree Information Form</h2>
-            <hr />
-            <div class="form-group">
-              @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-              <div class="col-md-10 insureeDataField">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-              </div>
+
+        <div id="TitleBlock" class="form-horizontal">
+
+          <h2 id="EnterInfo">Insuree Information Form</h2>
+          <hr />
+          <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+            <div class="col-md-10 insureeDataField">
+              @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+              @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+            <div class="col-md-10 insureeDataField">
+              @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+              @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+            <div class="col-md-10 insureeDataField ">
+              @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @Class = "form-control", @type = "email" } })
+              @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+            <div class="col-md-10 insureeDataField ">
+              @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+              @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.AutoYear, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+            <div class="col-md-10 insureeDataField">
+              @Html.EditorFor(model => model.AutoYear, new { htmlAttributes = new { @class = "form-control" } })
+              @Html.ValidationMessageFor(model => model.AutoYear, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.AutoMake, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+            <div class="col-md-10 insureeDataField">
+              @Html.EditorFor(model => model.AutoMake, new { htmlAttributes = new { @class = "form-control" } })
+              @Html.ValidationMessageFor(model => model.AutoMake, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.AutoModel, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+            <div class="col-md-10 insureeDataField">
+              @Html.EditorFor(model => model.AutoModel, new { htmlAttributes = new { @class = "form-control" } })
+              @Html.ValidationMessageFor(model => model.AutoModel, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.SpeedingTickets, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+            <div class="col-md-10 insureeDataField ">
+              @Html.EditorFor(model => model.SpeedingTickets, new { htmlAttributes = new { @class = "form-control" } })
+              @Html.ValidationMessageFor(model => model.SpeedingTickets, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.DUI, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+
+            <div id="DUIRadioButton1" class="radio-inline form-control insureeDataField col-md-10">
+              @Html.RadioButtonFor(model => model.DUI, "Yes_DUI")
             </div>
 
-            <div class="form-group">
-              @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-              <div class="col-md-10 insureeDataField">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-              </div>
+            <div id="DUIRadioButton2" class="radio-inline form-control insureeDataField col-md-10">
+              @Html.RadioButtonFor(model => model.DUI, "No_DUI")
+            </div>
+            <div class="col-md-10">
+              @Html.EditorFor(model => model.DUI, new { htmlAttributes = new { @class = "form-control insureeDataField" } })
+              @Html.ValidationMessageFor(model => model.DUI, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.CoverageType, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
+            <div id="CoverageRadioButton1" class="radio-inline form-control insureeDataField col-md-10">
+              @Html.EditorFor(model => model.CoverageType, "Yes_Full-Coverage", new { htmlAttributes = new { @class = "form-control insureeDataField radio-inline btn" } })
+            </div>
+            <div id="CoverageRadioButton2" class="radio-inline form-control insureeDataField col-md-10">
+              @Html.RadioButtonFor(model => model.CoverageType, "No_Full-Coverage", new { htmlAttributes = new { @class = "form-control insureeDataField radio-inlibe btn" } }))
+            </div>
+            <div class="col-md-10">
+              @Html.EditorFor(model => model.CoverageType, new { htmlAttributes = new { @class = "form-control insureeDataField" } })
+              @Html.ValidationMessageFor(model => model.CoverageType, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div id="FormSubmitButton" class="form-group">
+            <div class="col-md-offset-2 col-md-10 btn btn-block">
+
+              <input id="CreateButton" type="submit" value="Create" class="btn btn-lg" />
+              <h4 id="YourQuote">  your Auto Insurance Quote!!!</h4>
             </div>
 
-            <div class="form-group">
-              @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-              <div class="col-md-10 insureeDataField ">
-                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
-              </div>
-            </div>
 
-            <div class="form-group">
-              @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-              <div class="col-md-10 insureeDataField ">
-                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
-                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
-              </div>
-            </div>
-
-            <div class="form-group">
-              @Html.LabelFor(model => model.AutoYear, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-              <div class="col-md-10 insureeDataField">
-                @Html.EditorFor(model => model.AutoYear, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AutoYear, "", new { @class = "text-danger" })
-              </div>
-            </div>
-
-            <div class="form-group">
-              @Html.LabelFor(model => model.AutoMake, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-              <div class="col-md-10 insureeDataField">
-                @Html.EditorFor(model => model.AutoMake, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AutoMake, "", new { @class = "text-danger" })
-              </div>
-            </div>
-
-            <div class="form-group">
-              @Html.LabelFor(model => model.AutoModel, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-              <div class="col-md-10 insureeDataField">
-                @Html.EditorFor(model => model.AutoModel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AutoModel, "", new { @class = "text-danger" })
-              </div>
-            </div>
-
-            <div class="form-group">
-              @Html.LabelFor(model => model.SpeedingTickets, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-              <div class="col-md-10 insureeDataField ">
-                @Html.EditorFor(model => model.SpeedingTickets, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SpeedingTickets, "", new { @class = "text-danger" })
-              </div>
-            </div>
-
-            <div class="form-group">
-              @Html.LabelFor(model => model.DUI, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-             
-                <div id="DUICheckBox" class="col-md-10 insureeDataField">
-                  @Html.EditorFor(model => model.DUI, new { htmlAttributes = new { @class = "form-control insureeDataField" } })
-                  @Html.ValidationMessageFor(model => model.DUI, "", new { @class = "text-danger" })
-                </div>
-         
-            </div>
-
-            <div class="form-group">
-               @Html.LabelFor(model => model.CoverageType, htmlAttributes: new { @class = "control-label col-md-2 labelStyle" })
-              <div id="CoverageCheckBox" class="col-md-10 insureeDataField">
-                @Html.EditorFor(model => model.DUI, new
-           { htmlAttributes = new { @class = "form-control insureeDataField" } })
-                          @Html.ValidationMessageFor(model => model.CoverageType, "", new { @class = "text-danger" })
-              </div>
-              </div>
-        <div id="FormSubmitButton" class="form-group">
-              <div class="col-md-offset-2 col-md-10 btn btn-block">
-          
-                <input id="CreateButton" type="submit" value="Create" class="btn btn-lg" />
-               <h4 id="YourQuote">  your Auto Insurance Quote!!!</h4>
-              </div>
-            </div>
-           
             <div id="FormConnectionLinks">
               To Learn More About Us...
               @Html.ActionLink("Follow Me", "About", "Home")
             </div>
-          
-      </div>
-        }
+          </div>
+
         </div>
-      </div>
-    </div>
-  <script src="~/Scripts/jquery-ui.js"></script>
+
+</div>
+           </div>
+           </div>
+        }
+
+
+        <script src="~/Scripts/jquery-ui.js"></script>
 </body>
 </html> 

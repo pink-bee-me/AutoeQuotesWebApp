@@ -181,7 +181,7 @@
     <Content Include="Content\Images\MonopolyCar.jpg" />
     <Content Include="Content\Images\pexels-arthouse-studio-4320781.jpg" />
     <Content Include="Content\Images\pexels-joshua-welch-1624600.jpg" />
-    <Content Include="Content\Images\pexels-pixabay-52531.jpg" />
+    <Content Include="Content\Images\RoadWithClouds.jpg" />
     <Content Include="Content\Images\pexels-ricardo-esquivel-3041347.jpg" />
     <Content Include="Content\Images\pexels-sebastian-palomino-1955134.jpg" />
     <Content Include="Content\Images\pexels-simon-migaj-2272357.jpg" />
@@ -412,6 +412,7 @@
     <Content Include="Views\AutoQuotes\QuoteItemization.cshtml" />
     <Content Include="Views\AutoQuotes\Create.cshtml" />
     <Content Include="Views\AutoQuotes\FinalAutoQuoteCreation.cshtml" />
+    <Content Include="Views\Shared\Date.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

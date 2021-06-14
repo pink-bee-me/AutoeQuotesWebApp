@@ -8,7 +8,7 @@ html {
 
 body {
     position: relative;
-    top: -7vh;
+    top: 0vh;
     left: 0vw;
     width: 100vw;
     height: 100vh;
@@ -22,7 +22,7 @@ body {
 
 #LandingPageHomeIndex {
     position: relative;
-    top: 0;
+    top: 0vh;
     left: 0vw;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -38,21 +38,21 @@ body {
 
 #ColorOverlay {
     position: relative;
-    top: 0;
-    left: 0;
+    top:-10vh;
+    left: 0vw;
     margin-top: 0;
     width: 100vw;
-    height: 100vh;
+    height: 110vh;
     background: rgba(255,255,255, 0.45);
+    background-size:cover;
     z-index: 1;
 }
 
 #TextOverlay {
     position: relative;
     background-size: cover;
- 
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 #AreYou {
@@ -62,7 +62,7 @@ body {
     text-align:center;
     padding-top: 1.5rem;
     font-family: "Josefin Sans", sans-serif;
-    font-size: 4.5em;
+    font-size: 3.5em;
     font-weight:400;
     font-style: italic;
     color: white;
@@ -74,10 +74,10 @@ body {
     position: relative;
     color: white;
     font-weight: 400;
-    font-size: 3em;
-    /*     font-style: italic;*/
+    font-size: 2.25em;
+    font-style: italic;
     position: relative;
-    top: 10vh;
+    top: 5vh;
     left:0;
     text-align:center;
     padding-top: 0px;
@@ -89,7 +89,7 @@ body {
     top: 10vh;
     margin-top: 10px;
     padding-top: 10px;
-    font-size: 2.5em;
+    font-size: 1.75em;
     font-family: "Nunito Sans", sans-serif;
     font-weight: 400;
     color: white;
@@ -98,12 +98,12 @@ body {
 
 #HowMuch {
     position: relative;
-    top: 7vh;
+    top: 3vh;
     left: 0vw;
     margin-bottom: 0;
     font-family: "Nunito Sans",sans-serif;
-    font-size: 2em;
-    font-weight:500;
+    font-size: 2.25em;
+    font-weight:400;
     color: white;
     text-align: center;
 }
@@ -112,7 +112,7 @@ body {
 #FreeQuoteButton a {
     position: relative;
     top: 10vh;
-    left: 40vw;
+    left: 30vw;
     font-family: "Nunito Sans", sans-serif;
     font-size: 1.5em;
     font-weight: bold;

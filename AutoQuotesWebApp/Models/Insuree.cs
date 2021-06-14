@@ -12,6 +12,7 @@ namespace AutoQuotesWebApp.Models
     using AutoQuotesWebApp.ViewModels;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Insuree
     {
@@ -40,7 +41,8 @@ namespace AutoQuotesWebApp.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; }
         public int AutoYear { get; set; }
         public string AutoMake { get; set; }
         public string AutoModel { get; set; }
